@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fastworks.jfinal.annotation.route;
+package com.jfinal.extentions.annotation.route;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface ControllerBind {
+public @interface ControllerBinder {
     String controllerKey();
 
     String viewPath() default "";

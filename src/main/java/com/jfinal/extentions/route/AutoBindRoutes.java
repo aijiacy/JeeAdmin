@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fastworks.jfinal.plugin.route;
+package com.jfinal.extentions.route;
 
 import java.util.List;
 
-import com.fastworks.jfinal.annotation.route.ControllerBind;
-import com.fastworks.jfinal.kit.ClassSearcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.jfinal.config.Routes;
 import com.jfinal.core.Controller;
+import com.jfinal.extentions.annotation.route.ControllerBinder;
+import com.jfinal.extentions.kit.ClazzKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.log.Logger;
 
@@ -45,7 +45,8 @@ public class AutoBindRoutes extends Routes {
         return this;
     }
 
-    public AutoBindRoutes addExcludeClasses(Class<? extends Controller>... clazzes) {
+    @SuppressWarnings("unchecked")
+	public AutoBindRoutes addExcludeClasses(Class<? extends Controller>... clazzes) {
         if (clazzes != null) {
             for (Class<? extends Controller> clazz : clazzes) {
                 excludeClasses.add(clazz);
@@ -71,14 +72,14 @@ public class AutoBindRoutes extends Routes {
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void config() {
-        List<Class<? extends Controller>> controllerClasses = ClassSearcher.of(Controller.class)
+        List<Class<? extends Controller>> controllerClasses = ClazzKit.of(Controller.class)
                 .includeAllJarsInLib(includeAllJarsInLib).injars(includeJars).search();
-        ControllerBind controllerBind = null;
+        ControllerBinder controllerBind = null;
         for (Class controller : controllerClasses) {
             if (excludeClasses.contains(controller)) {
                 continue;
             }
-            controllerBind = (ControllerBind) controller.getAnnotation(ControllerBind.class);
+            controllerBind = (ControllerBinder) controller.getAnnotation(ControllerBinder.class);
             if (controllerBind == null) {
                 if (!autoScan) {
                     continue;

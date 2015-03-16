@@ -13,25 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fastworks.jfinal.plugin.sqlxml;
+package com.jfinal.extentions.plugin.sql;
 
-import com.jfinal.plugin.IPlugin;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
 
-public class SqlInXmlPlugin implements IPlugin {
+@XmlRootElement
+public class SqlItem {
+    @XmlAttribute
+    public String id;
 
-    public SqlInXmlPlugin() {
-    }
-
-    @Override
-    public boolean start() {
-        SqlKit.init();
-        return true;
-    }
-
-    @Override
-    public boolean stop() {
-        SqlKit.clearSqlMap();
-        return true;
-    }
+    @XmlValue
+    public String value;
 
 }

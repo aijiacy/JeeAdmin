@@ -1,9 +1,9 @@
 package com.fastworks.core.model;
 
-import com.fastworks.jfinal.annotation.table.TableBind;
+import com.jfinal.extentions.annotation.table.TableBinder;
 import com.jfinal.plugin.activerecord.Model;
 
-@TableBind(tableName="sys_functions",pkName="uuid")
+@TableBinder(tableName="sys_functions",pkName="uuid")
 public class Function extends Model<Function> {
 
 	private static final long serialVersionUID = 1L;

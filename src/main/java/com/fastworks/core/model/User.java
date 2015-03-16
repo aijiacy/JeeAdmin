@@ -1,10 +1,10 @@
 package com.fastworks.core.model;
 
-import com.fastworks.jfinal.annotation.table.TableBind;
-import com.fastworks.jfinal.plugin.sqlxml.SqlKit;
+import com.jfinal.extentions.annotation.table.TableBinder;
+import com.jfinal.extentions.kit.SqlKit;
 import com.jfinal.plugin.activerecord.Model;
 
-@TableBind(tableName="sys_user", pkName="uuid")
+@TableBinder(tableName="sys_user", pkName="uuid")
 public class User extends Model<User>{
 
 	private static final long serialVersionUID = 1L;

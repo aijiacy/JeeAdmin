@@ -9,18 +9,18 @@ import org.apache.log4j.Logger;
 import com.fastworks.core.define.ReturnMsg;
 import com.fastworks.core.model.Account;
 import com.fastworks.core.interceptor.AuthInterceptor;
-import com.fastworks.jfinal.annotation.route.ControllerBind;
 import com.fastworks.utils.MD5Utils;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.core.Controller;
+import com.jfinal.extentions.annotation.route.ControllerBinder;
 
 /**
  * 登录处理
  * @author caoyong
  *
  */
-@ControllerBind(controllerKey="/login")
+@ControllerBinder(controllerKey="/login")
 @Before(AuthInterceptor.class)//Controller级别：通用验证拦截器
 public class LoginController extends Controller{
 	

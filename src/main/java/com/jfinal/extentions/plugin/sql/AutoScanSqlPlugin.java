@@ -13,10 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fastworks.jfinal.plugin.table;
+package com.jfinal.extentions.plugin.sql;
 
-public interface INameStyle {
+import com.jfinal.extentions.kit.SqlKit;
+import com.jfinal.plugin.IPlugin;
 
-    String name(String className);
+public class AutoScanSqlPlugin implements IPlugin {
+
+    public AutoScanSqlPlugin() {
+    }
+
+    @Override
+    public boolean start() {
+        SqlKit.init();
+        return true;
+    }
+
+    @Override
+    public boolean stop() {
+        SqlKit.clearSqlMap();
+        return true;
+    }
 
 }

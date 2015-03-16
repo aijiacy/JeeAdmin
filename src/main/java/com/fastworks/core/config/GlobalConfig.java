@@ -5,16 +5,15 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
-import com.fastworks.jfinal.plugin.route.AutoBindRoutes;
-import com.fastworks.jfinal.plugin.sqlxml.SqlInXmlPlugin;
-import com.fastworks.jfinal.plugin.table.AutoTableBindPlugin;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
-import com.jfinal.core.JFinal;
+import com.jfinal.extentions.plugin.sql.AutoScanSqlPlugin;
+import com.jfinal.extentions.plugin.table.AutoBindTablePlugin;
+import com.jfinal.extentions.route.AutoBindRoutes;
 import com.jfinal.plugin.activerecord.cache.EhCache;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -43,7 +42,7 @@ public class GlobalConfig extends JFinalConfig {
 //		me.add(new AdminRoutes());// 后端路由
 //		me.add(new FrontRoutes());// 前端路由
 		AutoBindRoutes abr = new AutoBindRoutes();
-		abr.autoScan(true);
+		abr.autoScan(false);
 		me.add(abr);
 	}
 
@@ -65,14 +64,14 @@ public class GlobalConfig extends JFinalConfig {
 		druidPlugin.addFilter(wallFilter);
 		me.add(druidPlugin);
 
-		AutoTableBindPlugin atbp = new AutoTableBindPlugin(druidPlugin);
+		AutoBindTablePlugin atbp = new AutoBindTablePlugin(druidPlugin);
 		atbp.autoScan(false);
 		atbp.setDialect(new MysqlDialect());
 		atbp.setShowSql(true);
 		atbp.setCache(new EhCache());
 		me.add(atbp);
 		
-		SqlInXmlPlugin sxp = new SqlInXmlPlugin();
+		AutoScanSqlPlugin sxp = new AutoScanSqlPlugin();
 		sxp.start();
 		me.add(sxp);
 		
@@ -87,7 +86,7 @@ public class GlobalConfig extends JFinalConfig {
 
 	@Override
 	public void configHandler(Handlers me) {
-		DruidStatViewHandler dsv = new DruidStatViewHandler("/admin/moniter",
+		DruidStatViewHandler dsv = new DruidStatViewHandler("/moniter",
 				new IDruidStatViewAuth() {
 					@Override
 					public boolean isPermitted(HttpServletRequest request) {

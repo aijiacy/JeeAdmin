@@ -1,4 +1,4 @@
-package com.fastworks.jfinal.annotation.table;
+package com.jfinal.extentions.annotation.table;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface TableBind {
+public @interface TableBinder {
 	
 	String tableName();
 

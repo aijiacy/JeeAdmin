@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fastworks.jfinal.plugin.sqlxml;
+package com.jfinal.extentions.kit;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fastworks.jfinal.kit.JaxbKit;
+import com.jfinal.extentions.plugin.sql.SqlGroup;
+import com.jfinal.extentions.plugin.sql.SqlItem;
 import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;
 
@@ -37,11 +38,11 @@ public class SqlKit {
         return sqlMap.get(groupNameAndsqlId);
     }
 
-    static void clearSqlMap() {
+    public static void clearSqlMap() {
         sqlMap.clear();
     }
 
-    static void init() {
+    public static void init() {
         sqlMap = new HashMap<String, String>();
         File file = new File(PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes" + File.separator + "sqlconfig");
         File[] files = file.listFiles(new FileFilter() {

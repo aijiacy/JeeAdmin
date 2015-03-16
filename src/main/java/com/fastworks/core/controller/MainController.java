@@ -1,11 +1,11 @@
 package com.fastworks.core.controller;
 
 import com.fastworks.core.interceptor.AuthInterceptor;
-import com.fastworks.jfinal.annotation.route.ControllerBind;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.extentions.annotation.route.ControllerBinder;
 
-@ControllerBind(controllerKey="/main")
+@ControllerBinder(controllerKey="/main")
 @Before(AuthInterceptor.class)
 public class MainController extends Controller{
 	

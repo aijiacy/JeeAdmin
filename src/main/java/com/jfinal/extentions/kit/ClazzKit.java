@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fastworks.jfinal.kit;
+package com.jfinal.extentions.kit;
 
 import com.google.common.collect.Lists;
 import com.jfinal.kit.PathKit;
@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class ClassSearcher {
+public class ClazzKit {
 
-    protected static final Logger LOG = Logger.getLogger(ClassSearcher.class);
+    protected static final Logger LOG = Logger.getLogger(ClazzKit.class);
 
     //private String classpath = PathKit.getRootClassPath();
     private String classpath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
@@ -41,10 +41,10 @@ public class ClassSearcher {
 
     private List<String> includeJars = Lists.newArrayList();
 
-    private Class target;
+    private Class<?> target;
 
     @SuppressWarnings("unchecked")
-    private static <T> List<Class<? extends T>> extraction(Class<T> clazz, List<String> classFileList) {
+    private static <T> List<Class<? extends T>> extraction(Class<?> clazz, List<String> classFileList) {
         List<Class<? extends T>> classList = Lists.newArrayList();
         for (String classFile : classFileList) {
             Class<?> classInFile = Reflect.on(classFile).get();
@@ -56,8 +56,8 @@ public class ClassSearcher {
         return classList;
     }
 
-    public static ClassSearcher of(Class target) {
-        return new ClassSearcher(target);
+    public static ClazzKit of(Class<?> target) {
+        return new ClazzKit(target);
     }
 
     /**
@@ -201,18 +201,18 @@ public class ClassSearcher {
         return classFiles;
     }
 
-    public ClassSearcher(Class target) {
+    public ClazzKit(Class<?> target) {
         this.target = target;
     }
 
-    public ClassSearcher injars(List<String> jars) {
+    public ClazzKit injars(List<String> jars) {
         if (jars != null) {
             includeJars.addAll(jars);
         }
         return this;
     }
 
-    public ClassSearcher inJars(String... jars) {
+    public ClazzKit inJars(String... jars) {
         if (jars != null) {
             for (String jar : jars) {
                 includeJars.add(jar);
@@ -221,22 +221,22 @@ public class ClassSearcher {
         return this;
     }
 
-    public ClassSearcher includeAllJarsInLib(boolean includeAllJarsInLib) {
+    public ClazzKit includeAllJarsInLib(boolean includeAllJarsInLib) {
         this.includeAllJarsInLib = includeAllJarsInLib;
         return this;
     }
 
-    public ClassSearcher classpath(String classpath) {
+    public ClazzKit classpath(String classpath) {
         this.classpath = classpath;
         return this;
     }
 
-    public ClassSearcher libDir(String libDir) {
+    public ClazzKit libDir(String libDir) {
         this.libDir = libDir;
         return this;
     }
 
-    public ClassSearcher scanPackages(List<String> scanPaths) {
+    public ClazzKit scanPackages(List<String> scanPaths) {
         if (scanPaths != null) {
             scanPackages.addAll(scanPaths);
         }

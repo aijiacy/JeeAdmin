@@ -1,9 +1,9 @@
 package com.fastworks.core.model;
 
-import com.fastworks.jfinal.annotation.table.TableBind;
+import com.jfinal.extentions.annotation.table.TableBinder;
 import com.jfinal.plugin.activerecord.Model;
 
-@TableBind(tableName = "sys_params", pkName = "uuid")
+@TableBinder(tableName = "sys_params", pkName = "uuid")
 public class Param extends Model<Param> {
 	private static final long serialVersionUID = 1L;
 
