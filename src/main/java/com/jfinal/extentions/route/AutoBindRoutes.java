@@ -21,7 +21,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.jfinal.config.Routes;
 import com.jfinal.core.Controller;
-import com.jfinal.extentions.annotation.route.ControllerBinder;
+import com.jfinal.extentions.annotation.route.ControllerBinding;
 import com.jfinal.extentions.kit.ClazzKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.log.Logger;
@@ -74,12 +74,12 @@ public class AutoBindRoutes extends Routes {
     public void config() {
         List<Class<? extends Controller>> controllerClasses = ClazzKit.of(Controller.class)
                 .includeAllJarsInLib(includeAllJarsInLib).injars(includeJars).search();
-        ControllerBinder controllerBind = null;
+        ControllerBinding controllerBind = null;
         for (Class controller : controllerClasses) {
             if (excludeClasses.contains(controller)) {
                 continue;
             }
-            controllerBind = (ControllerBinder) controller.getAnnotation(ControllerBinder.class);
+            controllerBind = (ControllerBinding) controller.getAnnotation(ControllerBinding.class);
             if (controllerBind == null) {
                 if (!autoScan) {
                     continue;

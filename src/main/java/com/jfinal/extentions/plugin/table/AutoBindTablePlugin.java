@@ -6,7 +6,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import com.google.common.collect.Lists;
-import com.jfinal.extentions.annotation.table.TableBinder;
+import com.jfinal.extentions.annotation.table.TableBinding;
 import com.jfinal.extentions.kit.ClazzKit;
 import com.jfinal.extentions.kit.Reflect;
 import com.jfinal.kit.PathKit;
@@ -153,12 +153,12 @@ public class AutoBindTablePlugin extends ActiveRecordPlugin {
     public boolean start() {
         List<Class<? extends Model>> modelClasses = ClazzKit.of(Model.class).libDir(libDir).classpath(classpath)
                 .scanPackages(scanPackages).injars(includeJars).includeAllJarsInLib(includeAllJarsInLib).search();
-        TableBinder tb;
+        TableBinding tb;
         for (Class modelClass : modelClasses) {
             if (excludeClasses.contains(modelClass)) {
                 continue;
             }
-            tb = (TableBinder) modelClass.getAnnotation(TableBinder.class);
+            tb = (TableBinding) modelClass.getAnnotation(TableBinding.class);
             String tableName;
             String arpConfName = Reflect.on(this).get("configName");
             if (tb == null) {

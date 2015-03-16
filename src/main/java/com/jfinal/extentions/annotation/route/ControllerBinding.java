@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface ControllerBinder {
+public @interface ControllerBinding {
     String controllerKey();
 
     String viewPath() default "";
