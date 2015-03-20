@@ -1,0 +1,134 @@
+2015-03-21 00:58:50 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 00:58:50 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 00:58:50 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 00:58:50 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 00:58:50 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 00:58:51 [org.eclipse.jetty.util.component.AbstractLifeCycle]-[WARN] FAILED JFinal: java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.jeasyframeworks.extentions.kit.SqlKit.init(SqlKit.java:59)
+	at com.jeasyframeworks.extentions.plugin.sql.AutoScanSqlPlugin.start(AutoScanSqlPlugin.java:28)
+	at com.jeasyframeworks.platform.config.GlobalConfig.configPlugin(GlobalConfig.java:76)
+	at com.jfinal.core.Config.configJFinal(Config.java:48)
+	at com.jfinal.core.JFinal.init(JFinal.java:67)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:120)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:64)
+	at com.jfinal.core.JFinal.start(JFinal.java:159)
+	at com.jeasyframeworks.platform.config.GlobalConfig.main(GlobalConfig.java:121)
+2015-03-21 00:58:51 [org.eclipse.jetty.webapp.WebAppContext]-[WARN] Failed startup of context o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+java.lang.NullPointerException
+	at com.jeasyframeworks.extentions.kit.SqlKit.init(SqlKit.java:59)
+	at com.jeasyframeworks.extentions.plugin.sql.AutoScanSqlPlugin.start(AutoScanSqlPlugin.java:28)
+	at com.jeasyframeworks.platform.config.GlobalConfig.configPlugin(GlobalConfig.java:76)
+	at com.jfinal.core.Config.configJFinal(Config.java:48)
+	at com.jfinal.core.JFinal.init(JFinal.java:67)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:120)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:64)
+	at com.jfinal.core.JFinal.start(JFinal.java:159)
+	at com.jeasyframeworks.platform.config.GlobalConfig.main(GlobalConfig.java:121)
+2015-03-21 00:58:51 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080
+2015-03-21 01:00:12 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 01:00:12 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 01:00:12 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 01:00:12 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 01:00:12 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 01:00:53 [org.eclipse.jetty.util.component.AbstractLifeCycle]-[WARN] FAILED JFinal: java.lang.NullPointerException
+java.lang.NullPointerException
+	at com.jeasyframeworks.extentions.kit.SqlKit.init(SqlKit.java:59)
+	at com.jeasyframeworks.extentions.plugin.sql.AutoScanSqlPlugin.start(AutoScanSqlPlugin.java:28)
+	at com.jeasyframeworks.platform.config.GlobalConfig.configPlugin(GlobalConfig.java:76)
+	at com.jfinal.core.Config.configJFinal(Config.java:48)
+	at com.jfinal.core.JFinal.init(JFinal.java:67)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:120)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:64)
+	at com.jfinal.core.JFinal.start(JFinal.java:159)
+	at com.jeasyframeworks.platform.config.GlobalConfig.main(GlobalConfig.java:121)
+2015-03-21 01:00:53 [org.eclipse.jetty.webapp.WebAppContext]-[WARN] Failed startup of context o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+java.lang.NullPointerException
+	at com.jeasyframeworks.extentions.kit.SqlKit.init(SqlKit.java:59)
+	at com.jeasyframeworks.extentions.plugin.sql.AutoScanSqlPlugin.start(AutoScanSqlPlugin.java:28)
+	at com.jeasyframeworks.platform.config.GlobalConfig.configPlugin(GlobalConfig.java:76)
+	at com.jfinal.core.Config.configJFinal(Config.java:48)
+	at com.jfinal.core.JFinal.init(JFinal.java:67)
+	at com.jfinal.core.JFinalFilter.init(JFinalFilter.java:49)
+	at org.eclipse.jetty.servlet.FilterHolder.doStart(FilterHolder.java:119)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:724)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:277)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer.doStart(JettyServer.java:120)
+	at com.jfinal.server.JettyServer.start(JettyServer.java:64)
+	at com.jfinal.core.JFinal.start(JFinal.java:159)
+	at com.jeasyframeworks.platform.config.GlobalConfig.main(GlobalConfig.java:121)
+2015-03-21 01:00:54 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080
+2015-03-21 01:01:46 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 01:01:46 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 01:01:46 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 01:01:46 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 01:01:46 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 01:02:16 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 01:02:16 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 01:02:18 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
+2015-03-21 01:02:23 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080
+2015-03-21 01:05:20 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 01:05:21 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 01:05:21 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 01:05:21 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 01:05:24 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 01:05:24 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 01:05:25 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
+2015-03-21 01:05:28 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080
+2015-03-21 01:10:10 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 01:10:11 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/target/JeeAdmin/}
+2015-03-21 01:10:11 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/target/JeeAdmin/}
+2015-03-21 01:10:16 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
+2015-03-21 01:10:21 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080
+2015-03-21 01:14:39 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 01:14:39 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 01:14:39 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 01:14:39 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 01:14:42 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 01:14:42 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 01:14:43 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
+2015-03-21 01:14:46 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080
