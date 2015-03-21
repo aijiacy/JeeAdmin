@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jeasyframeworks.extentions.annotation.route;
+package com.jeasyframeworks.extentions.route.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface ControllerBinding {
+public @interface ControllerKey {
     String controllerKey();
 
     String viewPath() default "";

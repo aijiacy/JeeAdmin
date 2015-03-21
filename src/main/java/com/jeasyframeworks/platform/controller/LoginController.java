@@ -6,7 +6,7 @@ import javax.servlet.http.Cookie;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.jeasyframeworks.extentions.annotation.route.ControllerBinding;
+import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
 import com.jeasyframeworks.platform.define.ReturnMsg;
 import com.jeasyframeworks.platform.interceptor.AuthInterceptor;
 import com.jeasyframeworks.platform.model.Account;
@@ -20,7 +20,7 @@ import com.jfinal.core.Controller;
  * @author caoyong
  *
  */
-@ControllerBinding(controllerKey="/login")
+@ControllerKey(controllerKey="/login")
 @Before(AuthInterceptor.class)//Controller级别：通用验证拦截器
 public class LoginController extends Controller{
 	

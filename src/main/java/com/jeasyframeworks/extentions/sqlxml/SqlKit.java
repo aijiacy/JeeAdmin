@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jeasyframeworks.extentions.kit;
+package com.jeasyframeworks.extentions.sqlxml;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jeasyframeworks.extentions.plugin.sql.SqlGroup;
-import com.jeasyframeworks.extentions.plugin.sql.SqlItem;
+import com.jeasyframeworks.extentions.sqlxml.element.SqlGroup;
+import com.jeasyframeworks.extentions.sqlxml.element.SqlItem;
 import com.jeasyframeworks.toolkit.jaxb.JaxbKit;
 import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;

@@ -1,4 +1,4 @@
-package com.jeasyframeworks.extentions.annotation.table;
+package com.jeasyframeworks.extentions.table.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface TableBinding {
+public @interface TableBind {
 	
 	String tableName();
 

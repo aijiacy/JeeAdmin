@@ -1,4 +1,4 @@
-package com.jeasyframeworks.extentions.plugin.table;
+package com.jeasyframeworks.extentions.table.plugin;
 
 import java.io.File;
 import java.util.List;
@@ -6,7 +6,9 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import com.google.common.collect.Lists;
-import com.jeasyframeworks.extentions.annotation.table.TableBinding;
+import com.jeasyframeworks.extentions.table.annotation.TableBind;
+import com.jeasyframeworks.extentions.table.nameing.INameStyle;
+import com.jeasyframeworks.extentions.table.nameing.SimpleNameStyles;
 import com.jeasyframeworks.toolkit.SeachClassKit;
 import com.jeasyframeworks.toolkit.reflect.ReflectKit;
 import com.jfinal.kit.PathKit;
@@ -17,7 +19,7 @@ import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.IDataSourceProvider;
 import com.jfinal.plugin.activerecord.Model;
 
-public class AutoBindTablePlugin extends ActiveRecordPlugin {
+public class TableBindPlugin extends ActiveRecordPlugin {
 
     protected final Logger log = Logger.getLogger(getClass());
 
@@ -31,74 +33,74 @@ public class AutoBindTablePlugin extends ActiveRecordPlugin {
     private String classpath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
     private String libDir = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "lib";
 
-    public AutoBindTablePlugin(IDataSourceProvider dataSourceProvider) {
+    public TableBindPlugin(IDataSourceProvider dataSourceProvider) {
         this(DbKit.MAIN_CONFIG_NAME, dataSourceProvider, SimpleNameStyles.DEFAULT);
     }
 
-    public AutoBindTablePlugin(String configName, IDataSourceProvider dataSourceProvider) {
+    public TableBindPlugin(String configName, IDataSourceProvider dataSourceProvider) {
         this(configName, dataSourceProvider, SimpleNameStyles.DEFAULT);
     }
 
-    public AutoBindTablePlugin(IDataSourceProvider dataSourceProvider, int transactionLevel) {
+    public TableBindPlugin(IDataSourceProvider dataSourceProvider, int transactionLevel) {
         this(DbKit.MAIN_CONFIG_NAME, dataSourceProvider, transactionLevel, SimpleNameStyles.DEFAULT);
     }
 
-    public AutoBindTablePlugin(String configName, IDataSourceProvider dataSourceProvider, int transactionLevel) {
+    public TableBindPlugin(String configName, IDataSourceProvider dataSourceProvider, int transactionLevel) {
         this(configName, dataSourceProvider, transactionLevel, SimpleNameStyles.DEFAULT);
     }
 
-    public AutoBindTablePlugin(IDataSourceProvider dataSourceProvider, INameStyle nameStyle) {
+    public TableBindPlugin(IDataSourceProvider dataSourceProvider, INameStyle nameStyle) {
         super(DbKit.MAIN_CONFIG_NAME, dataSourceProvider);
         this.nameStyle = nameStyle;
     }
 
-    public AutoBindTablePlugin(String configName, IDataSourceProvider dataSourceProvider, INameStyle nameStyle) {
+    public TableBindPlugin(String configName, IDataSourceProvider dataSourceProvider, INameStyle nameStyle) {
         super(configName, dataSourceProvider);
         this.nameStyle = nameStyle;
     }
 
-    public AutoBindTablePlugin(IDataSourceProvider dataSourceProvider, int transactionLevel, INameStyle nameStyle) {
+    public TableBindPlugin(IDataSourceProvider dataSourceProvider, int transactionLevel, INameStyle nameStyle) {
         super(DbKit.MAIN_CONFIG_NAME, dataSourceProvider, transactionLevel);
         this.nameStyle = nameStyle;
     }
 
-    public AutoBindTablePlugin(String configName, IDataSourceProvider dataSourceProvider, int transactionLevel, INameStyle nameStyle) {
+    public TableBindPlugin(String configName, IDataSourceProvider dataSourceProvider, int transactionLevel, INameStyle nameStyle) {
         super(configName, dataSourceProvider, transactionLevel);
         this.nameStyle = nameStyle;
     }
 
-    public AutoBindTablePlugin(DataSource dataSource) {
+    public TableBindPlugin(DataSource dataSource) {
         this(DbKit.MAIN_CONFIG_NAME, dataSource, SimpleNameStyles.DEFAULT);
     }
 
-    public AutoBindTablePlugin(String configName, DataSource dataSource) {
+    public TableBindPlugin(String configName, DataSource dataSource) {
         this(configName, dataSource, SimpleNameStyles.DEFAULT);
     }
 
-    public AutoBindTablePlugin(DataSource dataSource, int transactionLevel) {
+    public TableBindPlugin(DataSource dataSource, int transactionLevel) {
         this(DbKit.MAIN_CONFIG_NAME, dataSource, transactionLevel, SimpleNameStyles.DEFAULT);
     }
 
-    public AutoBindTablePlugin(String configName, DataSource dataSource, int transactionLevel) {
+    public TableBindPlugin(String configName, DataSource dataSource, int transactionLevel) {
         this(configName, dataSource, transactionLevel, SimpleNameStyles.DEFAULT);
     }
 
-    public AutoBindTablePlugin(DataSource dataSource, INameStyle nameStyle) {
+    public TableBindPlugin(DataSource dataSource, INameStyle nameStyle) {
         super(DbKit.MAIN_CONFIG_NAME, dataSource);
         this.nameStyle = nameStyle;
     }
 
-    public AutoBindTablePlugin(String configName, DataSource dataSource, INameStyle nameStyle) {
+    public TableBindPlugin(String configName, DataSource dataSource, INameStyle nameStyle) {
         super(configName, dataSource);
         this.nameStyle = nameStyle;
     }
 
-    public AutoBindTablePlugin(DataSource dataSource, int transactionLevel, INameStyle nameStyle) {
+    public TableBindPlugin(DataSource dataSource, int transactionLevel, INameStyle nameStyle) {
         super(DbKit.MAIN_CONFIG_NAME, dataSource, transactionLevel);
         this.nameStyle = nameStyle;
     }
 
-    public AutoBindTablePlugin(String configName, DataSource dataSource, int transactionLevel, INameStyle nameStyle) {
+    public TableBindPlugin(String configName, DataSource dataSource, int transactionLevel, INameStyle nameStyle) {
         super(configName, dataSource, transactionLevel);
         this.nameStyle = nameStyle;
     }
@@ -109,7 +111,7 @@ public class AutoBindTablePlugin extends ActiveRecordPlugin {
      * @param packages
      * @return
      */
-    public AutoBindTablePlugin addScanPackages(String... packages) {
+    public TableBindPlugin addScanPackages(String... packages) {
         for (String pkg : packages) {
             scanPackages.add(pkg);
         }
@@ -117,7 +119,7 @@ public class AutoBindTablePlugin extends ActiveRecordPlugin {
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public AutoBindTablePlugin addExcludeClasses(Class<? extends Model>... clazzes) {
+    public TableBindPlugin addExcludeClasses(Class<? extends Model>... clazzes) {
         for (Class<? extends Model> clazz : clazzes) {
             excludeClasses.add(clazz);
         }
@@ -125,21 +127,21 @@ public class AutoBindTablePlugin extends ActiveRecordPlugin {
     }
 
     @SuppressWarnings("rawtypes")
-    public AutoBindTablePlugin addExcludeClasses(List<Class<? extends Model>> clazzes) {
+    public TableBindPlugin addExcludeClasses(List<Class<? extends Model>> clazzes) {
         if (clazzes != null) {
             excludeClasses.addAll(clazzes);
         }
         return this;
     }
 
-    public AutoBindTablePlugin addJars(List<String> jars) {
+    public TableBindPlugin addJars(List<String> jars) {
         if (jars != null) {
             includeJars.addAll(jars);
         }
         return this;
     }
 
-    public AutoBindTablePlugin addJars(String... jars) {
+    public TableBindPlugin addJars(String... jars) {
         if (jars != null) {
             for (String jar : jars) {
                 includeJars.add(jar);
@@ -153,12 +155,12 @@ public class AutoBindTablePlugin extends ActiveRecordPlugin {
     public boolean start() {
         List<Class<? extends Model>> modelClasses = SeachClassKit.of(Model.class).libDir(libDir).classpath(classpath)
                 .scanPackages(scanPackages).injars(includeJars).includeAllJarsInLib(includeAllJarsInLib).search();
-        TableBinding tb;
+        TableBind tb;
         for (Class modelClass : modelClasses) {
             if (excludeClasses.contains(modelClass)) {
                 continue;
             }
-            tb = (TableBinding) modelClass.getAnnotation(TableBinding.class);
+            tb = (TableBind) modelClass.getAnnotation(TableBind.class);
             String tableName;
             String arpConfName = ReflectKit.on(this).get("configName");
             if (tb == null) {
@@ -189,21 +191,21 @@ public class AutoBindTablePlugin extends ActiveRecordPlugin {
         return super.stop();
     }
 
-    public AutoBindTablePlugin autoScan(boolean autoScan) {
+    public TableBindPlugin autoScan(boolean autoScan) {
         this.autoScan = autoScan;
         return this;
     }
 
-    public AutoBindTablePlugin classpath(String classpath) {
+    public TableBindPlugin classpath(String classpath) {
         this.classpath = classpath;
         return this;
     }
 
-    public AutoBindTablePlugin libDir(String libDir) {
+    public TableBindPlugin libDir(String libDir) {
         this.libDir = libDir;
         return this;
     }
-    public AutoBindTablePlugin includeAllJarsInLib(boolean includeAllJarsInLib) {
+    public TableBindPlugin includeAllJarsInLib(boolean includeAllJarsInLib) {
         this.includeAllJarsInLib = includeAllJarsInLib;
         return this;
     }

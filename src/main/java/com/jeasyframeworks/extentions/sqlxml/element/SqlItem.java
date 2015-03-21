@@ -13,26 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jeasyframeworks.extentions.plugin.sql;
+package com.jeasyframeworks.extentions.sqlxml.element;
 
-import com.jeasyframeworks.extentions.kit.SqlKit;
-import com.jfinal.plugin.IPlugin;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
 
-public class AutoScanSqlPlugin implements IPlugin {
+@XmlRootElement
+public class SqlItem {
+    @XmlAttribute
+    public String id;
 
-    public AutoScanSqlPlugin() {
-    }
-
-    @Override
-    public boolean start() {
-        SqlKit.init();
-        return true;
-    }
-
-    @Override
-    public boolean stop() {
-        SqlKit.clearSqlMap();
-        return true;
-    }
+    @XmlValue
+    public String value;
 
 }

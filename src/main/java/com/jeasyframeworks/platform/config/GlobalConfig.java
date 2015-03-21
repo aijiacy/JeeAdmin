@@ -5,9 +5,10 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
-import com.jeasyframeworks.extentions.plugin.sql.AutoScanSqlPlugin;
-import com.jeasyframeworks.extentions.plugin.table.AutoBindTablePlugin;
-import com.jeasyframeworks.extentions.route.AutoBindRoutes;
+import com.jeasyframeworks.extentions.log.Slf4jLogFactory;
+import com.jeasyframeworks.extentions.route.plugin.RoutesBind;
+import com.jeasyframeworks.extentions.sqlxml.plugin.SqlInXmlPlugin;
+import com.jeasyframeworks.extentions.table.plugin.TableBindPlugin;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -33,6 +34,7 @@ public class GlobalConfig extends JFinalConfig {
 
 	@Override
 	public void configConstant(Constants me) {
+		me.setLoggerFactory(new Slf4jLogFactory());
 		me.setDevMode(true);
 		me.setViewType(ViewType.JSP);
 		me.setBaseViewPath("WEB-INF/views/");
@@ -40,11 +42,10 @@ public class GlobalConfig extends JFinalConfig {
 
 	@Override
 	public void configRoute(Routes me) {
-//		me.add(new AdminRoutes());// 后端路由
-//		me.add(new FrontRoutes());// 前端路由
-		AutoBindRoutes abr = new AutoBindRoutes();
-		abr.autoScan(false);
-		me.add(abr);
+		RoutesBind routesBind = new RoutesBind();
+		routesBind.autoScan(false);
+		routesBind.addIncludePaths("com.jeasyframeworks.platform.controller");
+		me.add(routesBind);
 	}
 
 	@Override
@@ -65,14 +66,14 @@ public class GlobalConfig extends JFinalConfig {
 		druidPlugin.addFilter(wallFilter);
 		me.add(druidPlugin);
 
-		AutoBindTablePlugin atbp = new AutoBindTablePlugin(druidPlugin);
-		atbp.autoScan(false);
-		atbp.setDialect(new MysqlDialect());
-		atbp.setShowSql(true);
-		atbp.setCache(new EhCache());
-		me.add(atbp);
+		TableBindPlugin tableBindPlugin = new TableBindPlugin(druidPlugin);
+		tableBindPlugin.autoScan(false);
+		tableBindPlugin.setDialect(new MysqlDialect());
+		tableBindPlugin.setShowSql(true);
+		tableBindPlugin.setCache(new EhCache());
+		me.add(tableBindPlugin);
 		
-		AutoScanSqlPlugin sxp = new AutoScanSqlPlugin();
+		SqlInXmlPlugin sxp = new SqlInXmlPlugin();
 		sxp.start();
 		me.add(sxp);
 		

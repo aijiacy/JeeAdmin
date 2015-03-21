@@ -132,3 +132,49 @@ java.lang.NullPointerException
 2015-03-21 01:14:42 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
 2015-03-21 01:14:43 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
 2015-03-21 01:14:46 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080
+2015-03-21 11:12:36 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 11:12:37 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:12:37 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:12:37 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:12:40 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 11:12:40 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:12:41 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
+2015-03-21 11:12:46 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080
+2015-03-21 11:18:30 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} closed
+2015-03-21 11:18:30 [org.eclipse.jetty.servlet.listener.ELContextCleaner]-[INFO] javax.el.BeanELResolver purged
+2015-03-21 11:18:30 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] stopped o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:18:30 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:18:30 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:18:30 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:18:34 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 11:18:34 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:18:38 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
+2015-03-21 11:20:11 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} closed
+2015-03-21 11:20:11 [org.eclipse.jetty.servlet.listener.ELContextCleaner]-[INFO] javax.el.BeanELResolver purged
+2015-03-21 11:20:11 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] stopped o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:20:11 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:20:11 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:20:11 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:20:19 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 11:20:19 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:20:19 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
+2015-03-21 11:51:31 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 11:51:32 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:51:32 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:51:32 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:52:47 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 11:52:47 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:52:48 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
+2015-03-21 11:52:53 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080
+2015-03-21 11:57:05 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 11:57:06 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:57:06 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:57:06 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:57:13 [org.eclipse.jetty.server.Server]-[INFO] jetty-8.1.8.v20121106
+2015-03-21 11:57:14 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:57:14 [org.eclipse.jetty.server.handler.ContextHandler]-[INFO] started o.e.j.w.WebAppContext{/,file:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/}
+2015-03-21 11:57:14 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:57:16 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] search error：/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/classesis not a dir！
+2015-03-21 11:57:16 [com.jeasyframeworks.toolkit.SeachClassKit]-[ERROR] file search error:/home/caoyong/workspaces/myworks/JeeAdmin/src/main/webapp/WEB-INF/lib is not a dir！
+2015-03-21 11:57:16 [com.alibaba.druid.pool.DruidDataSource]-[INFO] {dataSource-1} inited
+2015-03-21 11:57:25 [org.eclipse.jetty.server.AbstractConnector]-[INFO] Started SelectChannelConnector@0.0.0.0:8080

@@ -13,18 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jeasyframeworks.extentions.plugin.sql;
+package com.jeasyframeworks.extentions.sqlxml.plugin;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
+import com.jeasyframeworks.extentions.sqlxml.SqlKit;
+import com.jfinal.plugin.IPlugin;
 
-@XmlRootElement
-public class SqlItem {
-    @XmlAttribute
-    public String id;
+public class SqlInXmlPlugin implements IPlugin {
 
-    @XmlValue
-    public String value;
+    public SqlInXmlPlugin() {
+    }
+
+    @Override
+    public boolean start() {
+        SqlKit.init();
+        return true;
+    }
+
+    @Override
+    public boolean stop() {
+        SqlKit.clearSqlMap();
+        return true;
+    }
 
 }

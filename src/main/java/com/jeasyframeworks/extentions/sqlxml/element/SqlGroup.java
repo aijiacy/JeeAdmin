@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jeasyframeworks.extentions.plugin.sql;
+package com.jeasyframeworks.extentions.sqlxml.element;
 
 import java.util.List;
 

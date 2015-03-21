@@ -2,12 +2,12 @@ package com.jeasyframeworks.platform.controller;
 
 import java.util.UUID;
 
-import com.jeasyframeworks.extentions.annotation.route.ControllerBinding;
+import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
 import com.jeasyframeworks.platform.model.Account;
 import com.jeasyframeworks.toolkit.encrypt.MD5EncryptKit;
 import com.jfinal.core.Controller;
 
-@ControllerBinding(controllerKey="/init")
+@ControllerKey(controllerKey="/init")
 public class InitialController extends Controller {
 	public void index() {
 		try {

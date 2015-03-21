@@ -1,10 +1,10 @@
 package com.jeasyframeworks.platform.model;
 
-import com.jeasyframeworks.extentions.annotation.table.TableBinding;
-import com.jeasyframeworks.extentions.kit.SqlKit;
+import com.jeasyframeworks.extentions.sqlxml.SqlKit;
+import com.jeasyframeworks.extentions.table.annotation.TableBind;
 import com.jfinal.plugin.activerecord.Model;
 
-@TableBinding(tableName = "sys_accounts", pkName = "uuid")
+@TableBind(tableName = "sys_accounts", pkName = "uuid")
 public class Account extends Model<Account> {
 
 	private static final long serialVersionUID = 1L;
