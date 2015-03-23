@@ -175,6 +175,7 @@ DROP TABLE IF EXISTS `jeeadmin`.`sys_roles` ;
 CREATE TABLE IF NOT EXISTS `jeeadmin`.`sys_roles` (
   `uuid` VARCHAR(36) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
+  `code` VARCHAR(45) NOT NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NULL,
   PRIMARY KEY (`uuid`))
@@ -182,6 +183,7 @@ ENGINE = InnoDB
 COMMENT = '系统角色';
 
 CREATE UNIQUE INDEX `UK_ROLE_NAME` ON `jeeadmin`.`sys_roles` (`name` ASC);
+CREATE UNIQUE INDEX `UK_ROLE_CODE` ON `jeeadmin`.`sys_roles` (`code` ASC);
 
 
 -- -----------------------------------------------------
