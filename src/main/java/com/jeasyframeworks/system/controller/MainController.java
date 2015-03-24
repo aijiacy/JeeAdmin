@@ -1,7 +1,7 @@
-package com.jeasyframeworks.platform.controller;
+package com.jeasyframeworks.system.controller;
 
 import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
-import com.jeasyframeworks.platform.interceptor.AuthInterceptor;
+import com.jeasyframeworks.system.interceptor.AuthInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 

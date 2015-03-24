@@ -1,4 +1,4 @@
-package com.jeasyframeworks.platform.controller;
+package com.jeasyframeworks.system.controller;
 
 
 import javax.servlet.http.Cookie;
@@ -7,9 +7,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
-import com.jeasyframeworks.platform.constants.AjaxMsg;
-import com.jeasyframeworks.platform.interceptor.AuthInterceptor;
-import com.jeasyframeworks.platform.model.Account;
+import com.jeasyframeworks.system.constants.AjaxMsg;
+import com.jeasyframeworks.system.interceptor.AuthInterceptor;
+import com.jeasyframeworks.system.model.Account;
 import com.jeasyframeworks.toolkit.encrypt.MD5EncryptKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.ClearInterceptor;

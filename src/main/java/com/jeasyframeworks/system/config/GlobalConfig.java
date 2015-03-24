@@ -1,4 +1,4 @@
-package com.jeasyframeworks.platform.config;
+package com.jeasyframeworks.system.config;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

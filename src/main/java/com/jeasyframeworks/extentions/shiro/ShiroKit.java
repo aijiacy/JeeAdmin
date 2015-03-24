@@ -15,6 +15,7 @@
  */
 package com.jeasyframeworks.extentions.shiro;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 import com.jeasyframeworks.extentions.shiro.handler.AuthzHandler;
@@ -31,14 +32,27 @@ public class ShiroKit {
 	 * 用来记录那个action或者actionpath中是否有shiro认证注解。
 	 */
 	private static ConcurrentMap<String, AuthzHandler> authzMaps = null;
+	/**
+	 * 用来记录数据权限
+	 */
+	private static Map<String, AuthzHandler> dbAuthzMaps = null;
+	
+	private static DBAuthzLoader dbAuthzLoader = null;
 
 	/**
 	 * 禁止初始化
 	 */
 	private ShiroKit() {}
 
-	public static void init(ConcurrentMap<String, AuthzHandler> maps) {
+	/**
+	 * 初始化 Shiro 权限
+	 * @param maps
+	 * @param dbAuthzLoader 改造，增加数据权限加载器.
+	 */
+	public static void init(ConcurrentMap<String, AuthzHandler> maps, DBAuthzLoader injectLoader) {
 		authzMaps = maps;
+		dbAuthzLoader = injectLoader;
+		loadAuthzFormDB();
 	}
 
 	public static AuthzHandler getAuthzHandler(String actionKey){
@@ -46,6 +60,16 @@ public class ShiroKit {
 		if(authzMaps.containsKey(controllerClassName)){
 			return true;
 		}*/
-		return authzMaps.get(actionKey);
+		AuthzHandler auth = null;
+		if(authzMaps.containsKey(actionKey)){
+			auth = authzMaps.get(actionKey);
+		} else {
+			auth = dbAuthzMaps.get(actionKey);
+		}
+		return auth;
+	}
+	
+	private static void loadAuthzFormDB(){
+		dbAuthzMaps = dbAuthzLoader.getDBAuthz();
 	}
 }

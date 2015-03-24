@@ -1,4 +1,4 @@
-package com.jeasyframeworks.platform.model;
+package com.jeasyframeworks.system.model;
 
 import com.jeasyframeworks.extentions.sqlxml.SqlKit;
 import com.jeasyframeworks.extentions.table.annotation.TableBind;

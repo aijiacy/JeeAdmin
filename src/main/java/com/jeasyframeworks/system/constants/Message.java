@@ -1,4 +1,4 @@
-package com.jeasyframeworks.platform.constants;
+package com.jeasyframeworks.system.constants;
 
 import java.io.Serializable;
 

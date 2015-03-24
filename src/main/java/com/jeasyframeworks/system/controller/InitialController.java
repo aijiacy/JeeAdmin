@@ -1,9 +1,9 @@
-package com.jeasyframeworks.platform.controller;
+package com.jeasyframeworks.system.controller;
 
 import java.util.UUID;
 
 import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
-import com.jeasyframeworks.platform.model.Account;
+import com.jeasyframeworks.system.model.Account;
 import com.jeasyframeworks.toolkit.encrypt.MD5EncryptKit;
 import com.jfinal.core.Controller;
 

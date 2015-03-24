@@ -1,6 +1,6 @@
-package com.jeasyframeworks.platform.interceptor;
+package com.jeasyframeworks.system.interceptor;
 
-import com.jeasyframeworks.platform.model.Account;
+import com.jeasyframeworks.system.model.Account;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 import com.jfinal.core.Controller;
