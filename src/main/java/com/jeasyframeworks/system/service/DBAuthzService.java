@@ -31,6 +31,7 @@ public class DBAuthzService implements DBAuthzLoader {
 		 * 例如 menu     /system/menus
 		 * 例如 function /system/menus/add
 		 */
+		
 		return null;
 	}
 

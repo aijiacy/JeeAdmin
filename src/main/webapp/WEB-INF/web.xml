@@ -6,7 +6,7 @@
 		<filter-class>com.jfinal.core.JFinalFilter</filter-class>
 		<init-param>
 			<param-name>configClass</param-name>
-			<param-value>com.jeasyframeworks.platform.config.GlobalConfig</param-value>
+			<param-value>com.jeasyframeworks.system.config.GlobalConfig</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

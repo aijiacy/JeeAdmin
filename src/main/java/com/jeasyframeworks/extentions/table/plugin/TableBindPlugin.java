@@ -30,7 +30,8 @@ public class TableBindPlugin extends ActiveRecordPlugin {
     private boolean includeAllJarsInLib = false;
     private List<String> scanPackages = Lists.newArrayList();
     private INameStyle nameStyle;
-    private String classpath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
+    private String classpath = PathKit.getRootClassPath();
+    //private String classpath = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "classes";
     private String libDir = PathKit.getWebRootPath() + File.separator + "WEB-INF" + File.separator + "lib";
 
     public TableBindPlugin(IDataSourceProvider dataSourceProvider) {

@@ -16,6 +16,7 @@ public class Account extends Model<Account> {
 	public static final String MOBILE = "mobile";
 	public static final String FK_USERID = "userid";
 	public static final String SUPER = "super";
+	public static final String LOCK_STATUS = "lockStatus";
 	
 	public static final Account dao = new Account();
 	

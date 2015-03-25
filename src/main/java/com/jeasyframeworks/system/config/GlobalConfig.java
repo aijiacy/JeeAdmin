@@ -67,7 +67,7 @@ public class GlobalConfig extends JFinalConfig {
 		me.add(druidPlugin);
 
 		TableBindPlugin tableBindPlugin = new TableBindPlugin(druidPlugin);
-		tableBindPlugin.addScanPackages("com.jeasyframeworks.platform.model");
+		tableBindPlugin.addScanPackages("com.jeasyframeworks.system.model");
 		tableBindPlugin.autoScan(false);
 		tableBindPlugin.setDialect(new MysqlDialect());
 		tableBindPlugin.setShowSql(true);
