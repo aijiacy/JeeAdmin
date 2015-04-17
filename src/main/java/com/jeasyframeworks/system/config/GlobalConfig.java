@@ -7,8 +7,11 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.jeasyframeworks.extentions.log.Slf4jLogFactory;
 import com.jeasyframeworks.extentions.route.plugin.RoutesBind;
+import com.jeasyframeworks.extentions.shiro.interceptor.ShiroInterceptor;
+import com.jeasyframeworks.extentions.shiro.plugin.ShiroPlugin;
 import com.jeasyframeworks.extentions.sqlxml.plugin.SqlInXmlPlugin;
 import com.jeasyframeworks.extentions.table.plugin.TableBindPlugin;
+import com.jeasyframeworks.system.service.shiro.DBAuthzService;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -32,8 +35,11 @@ import com.jfinal.render.ViewType;
  */
 public class GlobalConfig extends JFinalConfig {
 
+	private Routes routes;
+	
 	@Override
 	public void configConstant(Constants me) {
+		loadPropertyFile("config.properties");
 		me.setLoggerFactory(new Slf4jLogFactory());
 		me.setDevMode(true);
 		me.setViewType(ViewType.JSP);
@@ -42,6 +48,7 @@ public class GlobalConfig extends JFinalConfig {
 
 	@Override
 	public void configRoute(Routes me) {
+		this.routes = me;
 		RoutesBind routesBind = new RoutesBind();
 		routesBind.autoScan(false);
 		routesBind.addIncludePaths("com.jeasyframeworks.platform.controller");
@@ -50,7 +57,6 @@ public class GlobalConfig extends JFinalConfig {
 
 	@Override
 	public void configPlugin(Plugins me) {
-		loadPropertyFile("config.properties");
 		// 数据连接配置
 		DruidPlugin druidPlugin = new DruidPlugin(
 				getProperty("mysql.jdbc.url"), getProperty("mysql.jdbc.user"),
@@ -74,17 +80,18 @@ public class GlobalConfig extends JFinalConfig {
 		tableBindPlugin.setCache(new EhCache());
 		me.add(tableBindPlugin);
 		
-		SqlInXmlPlugin sxp = new SqlInXmlPlugin();
-		sxp.start();
-		me.add(sxp);
+		//sqlInXml插件
+		me.add(new SqlInXmlPlugin());
+		//ehcache缓存插件
+		me.add(new EhCachePlugin());
+		//Shiro权限框架
+	    me.add(new ShiroPlugin(routes, new DBAuthzService()));
 		
-		EhCachePlugin ehcachePlugin = new EhCachePlugin();
-		me.add(ehcachePlugin);
 	}
 
 	@Override
 	public void configInterceptor(Interceptors me) {
-		
+		me.add(new ShiroInterceptor());
 	}
 
 	@Override

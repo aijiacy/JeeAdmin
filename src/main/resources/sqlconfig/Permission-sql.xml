@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
+<sqlGroup name="Permission" >
+      <sql id="findByRoleId">select sp.* from sys_permissions sp, sys_role_permission srp where sp.uuid = srp.permissionid and srp.roleid = ?</sql>
+</sqlGroup>

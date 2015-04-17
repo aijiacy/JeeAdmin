@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
+<sqlGroup name="Platform" >
+      <sql id="findAll">select * from sys_platforms</sql>
+      <sql id="findByPermissonId">select sp.uuid,sp.name,sp.code,sp.url,sp.`desc`,sp.create_time,sp.update_time from sys_platforms sp, sys_permission_platform spp where sp.uuid = spp.platformid and spp.permissionid = ?</sql>
+</sqlGroup>

@@ -321,6 +321,7 @@ DROP TABLE IF EXISTS `jeeadmin`.`sys_menus` ;
 CREATE TABLE IF NOT EXISTS `jeeadmin`.`sys_menus` (
   `uuid` VARCHAR(36) NOT NULL,
   `name` VARCHAR(45) NULL,
+  `code` VARCHAR(45) NULL,
   `icon` VARCHAR(45) NULL,
   `url` VARCHAR(300) NULL,
   `pid` VARCHAR(36) NULL,
@@ -349,6 +350,7 @@ DROP TABLE IF EXISTS `jeeadmin`.`sys_functions` ;
 CREATE TABLE IF NOT EXISTS `jeeadmin`.`sys_functions` (
   `uuid` VARCHAR(36) NOT NULL,
   `name` VARCHAR(45) NULL,
+  `code` VARCHAR(45) NULL,
   `elemid` VARCHAR(45) NULL,
   `actionType` VARCHAR(45) NULL,
   `actionUrl` VARCHAR(300) NULL,
