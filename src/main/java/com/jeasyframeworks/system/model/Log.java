@@ -1,10 +1,10 @@
 package com.jeasyframeworks.system.model;
 
+import com.jeasyframeworks.core.model.BaseModel;
 import com.jeasyframeworks.extentions.table.annotation.TableBind;
-import com.jeasyframeworks.extentions.table.model.KeyModel;
 
 @TableBind(tableName = "sys_logs", pkName = "uuid")
-public class Log extends KeyModel<Log> {
+public class Log extends BaseModel<Log> {
 
 	private static final long serialVersionUID = 1L;
 

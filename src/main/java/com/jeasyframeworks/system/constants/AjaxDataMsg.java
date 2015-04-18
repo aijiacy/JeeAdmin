@@ -9,11 +9,11 @@ public class AjaxDataMsg<T> extends AjaxMsg {
 	private int rowCnt = 0;
 	private List<T> data = null;
 
-	public AjaxDataMsg(String retCode, String retMsg) {
+	public AjaxDataMsg(int retCode, String retMsg) {
 		super(retCode, retMsg);
 	}
 
-	public AjaxDataMsg(String retCode, String retMsg, int rowCnt, List<T> data) {
+	public AjaxDataMsg(int retCode, String retMsg, int rowCnt, List<T> data) {
 		super(retCode, retMsg);
 		this.rowCnt = rowCnt;
 		this.data = data;

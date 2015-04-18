@@ -2,12 +2,12 @@ package com.jeasyframeworks.system.model;
 
 import java.util.List;
 
+import com.jeasyframeworks.core.model.BaseModel;
 import com.jeasyframeworks.extentions.sqlxml.SqlKit;
 import com.jeasyframeworks.extentions.table.annotation.TableBind;
-import com.jeasyframeworks.extentions.table.model.KeyModel;
 
 @TableBind(tableName="sys_platforms", pkName="uuid")
-public class Platform extends KeyModel<Platform> {
+public class Platform extends BaseModel<Platform> {
 
 	private static final long serialVersionUID = 1L;
 

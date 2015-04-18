@@ -2,12 +2,12 @@ package com.jeasyframeworks.system.model;
 
 import java.util.List;
 
+import com.jeasyframeworks.core.model.BaseModel;
 import com.jeasyframeworks.extentions.sqlxml.SqlKit;
 import com.jeasyframeworks.extentions.table.annotation.TableBind;
-import com.jeasyframeworks.extentions.table.model.KeyModel;
 
 @TableBind(tableName="sys_dictionaries",pkName="uuid")
-public class Dictionary extends KeyModel<Dictionary> {
+public class Dictionary extends BaseModel<Dictionary> {
 
 	private static final long serialVersionUID = 1L;
 	
