@@ -11,6 +11,7 @@ import com.jeasyframeworks.extentions.shiro.interceptor.ShiroInterceptor;
 import com.jeasyframeworks.extentions.shiro.plugin.ShiroPlugin;
 import com.jeasyframeworks.extentions.sqlxml.plugin.SqlInXmlPlugin;
 import com.jeasyframeworks.extentions.table.plugin.TableBindPlugin;
+import com.jeasyframeworks.system.interceptor.LogInterceptor;
 import com.jeasyframeworks.system.service.shiro.DBAuthzService;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -92,6 +93,7 @@ public class GlobalConfig extends JFinalConfig {
 	@Override
 	public void configInterceptor(Interceptors me) {
 		me.add(new ShiroInterceptor());
+		me.add(new LogInterceptor());
 	}
 
 	@Override
@@ -127,6 +129,6 @@ public class GlobalConfig extends JFinalConfig {
 	}
 	
 	public static void main(String[] args) {
-		JFinal.start("src/main/webapp", 8080, "/", 50);
+		JFinal.start("src/main/webapp", 8080, "/JeeAdmin", 50);
 	}
 }

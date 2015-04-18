@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.jeasyframeworks.extentions.sqlxml.SqlKit;
 import com.jeasyframeworks.extentions.table.annotation.TableBind;
-import com.jfinal.plugin.activerecord.Model;
+import com.jeasyframeworks.extentions.table.model.KeyModel;
 
 @TableBind(tableName="sys_functions",pkName="uuid")
-public class Function extends Model<Function> {
+public class Function extends KeyModel<Function> {
 
 	private static final long serialVersionUID = 1L;
 	

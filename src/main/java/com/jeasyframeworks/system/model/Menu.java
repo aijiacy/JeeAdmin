@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.jeasyframeworks.extentions.sqlxml.SqlKit;
 import com.jeasyframeworks.extentions.table.annotation.TableBind;
-import com.jfinal.plugin.activerecord.Model;
+import com.jeasyframeworks.extentions.table.model.KeyModel;
 
 @TableBind(tableName="sys_menus", pkName="uuid")
-public class Menu extends Model<Menu>{
+public class Menu extends KeyModel<Menu>{
 
 	private static final long serialVersionUID = 1L;
 	

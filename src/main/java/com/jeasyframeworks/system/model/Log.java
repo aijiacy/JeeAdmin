@@ -1,12 +1,18 @@
 package com.jeasyframeworks.system.model;
 
 import com.jeasyframeworks.extentions.table.annotation.TableBind;
-import com.jfinal.plugin.activerecord.Model;
+import com.jeasyframeworks.extentions.table.model.KeyModel;
 
-@TableBind(tableName="sys_logs",pkName="uuid")
-public class Log extends Model<Log> {
+@TableBind(tableName = "sys_logs", pkName = "uuid")
+public class Log extends KeyModel<Log> {
 
 	private static final long serialVersionUID = 1L;
+
+	public static final String PK_ID = "uuid",
+			OP_NAME = "op_name",
+			OP_ACTION = "op_action",
+			OP_USER = "op_user",
+			OP_DESC = "op_desc";
 
 	public static final Log dao = new Log();
 }
