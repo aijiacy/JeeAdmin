@@ -39,6 +39,6 @@
 	<!-- JFinal过滤器 End -->
 
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>system/login</welcome-file>
 	</welcome-file-list>
 </web-app>

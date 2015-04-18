@@ -1,4 +1,4 @@
-package com.jeasyframeworks.system.service.shiro;
+package com.jeasyframeworks.system.service;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -24,6 +24,7 @@ import com.jeasyframeworks.system.model.Menu;
 import com.jeasyframeworks.system.model.Permission;
 import com.jeasyframeworks.system.model.Platform;
 import com.jeasyframeworks.system.model.Role;
+import com.jeasyframeworks.toolkit.encrypt.MD5EncryptKit;
 
 public class SystemAuthRealm extends AuthorizingRealm {
 
@@ -38,16 +39,25 @@ public class SystemAuthRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authToken) throws AuthenticationException {
 		// TODO Shiro登录认证
-		UsernamePasswordToken userToken = (UsernamePasswordToken) authToken;
-		Account account = null;
-		String username = userToken.getUsername();
-		account = Account.dao.findByName(username);
-		if (account != null) {
-			SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(
-					account, account.getStr(Account.PASSWORD), getName());
-			return authInfo;
+		try{
+			UsernamePasswordToken userToken = (UsernamePasswordToken) authToken;
+			Account account = null;
+			String username = userToken.getUsername();
+			String password = String.valueOf(userToken.getPassword());
+			account = Account.dao.findByName(username);
+			if (account != null) {
+					if(MD5EncryptKit.isEqual(password, account.getStr(Account.PASSWORD))){
+						SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(account, password, getName());
+						return authInfo;
+					} else {
+						throw new AuthenticationException("密码错误");
+					}
+			} else {
+				throw new AuthenticationException("用户不存在");
+			}
+		} catch(Exception ex) {
+			throw new AuthenticationException("用户验证失败:" + ex);
 		}
-		return null;
 	}
 
 	/**

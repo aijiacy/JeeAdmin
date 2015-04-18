@@ -12,7 +12,7 @@ import com.jeasyframeworks.extentions.shiro.plugin.ShiroPlugin;
 import com.jeasyframeworks.extentions.sqlxml.plugin.SqlInXmlPlugin;
 import com.jeasyframeworks.extentions.table.plugin.TableBindPlugin;
 import com.jeasyframeworks.system.interceptor.LogInterceptor;
-import com.jeasyframeworks.system.service.shiro.DBAuthzService;
+import com.jeasyframeworks.system.service.DBAuthzService;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;

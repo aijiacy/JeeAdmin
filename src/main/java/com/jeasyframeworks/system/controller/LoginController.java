@@ -1,85 +1,79 @@
 package com.jeasyframeworks.system.controller;
 
-
-import javax.servlet.http.Cookie;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 
 import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
+import com.jeasyframeworks.extentions.shiro.annotation.ClearShiro;
 import com.jeasyframeworks.system.constants.AjaxMsg;
-import com.jeasyframeworks.system.interceptor.AuthInterceptor;
 import com.jeasyframeworks.system.model.Account;
-import com.jeasyframeworks.toolkit.encrypt.MD5EncryptKit;
-import com.jfinal.aop.Before;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.core.Controller;
 
 /**
  * 登录处理
+ * 
  * @author caoyong
  *
  */
-@ControllerKey(controllerKey="/login")
-@Before(AuthInterceptor.class)//Controller级别：通用验证拦截器
-public class LoginController extends Controller{
-	
+@ControllerKey(controllerKey = "/system")
+public class LoginController extends Controller {
+
 	private static final Logger logger = LogManager.getLogger(LoginController.class);
-	
+
 	@ClearInterceptor
-	public void index(){
+	public void index() {
 		render("login.html");
 	}
+
 	/**
 	 * 用户登录
 	 */
-	@ClearInterceptor
-	public void logon(){
+	@ClearShiro
+	public void login() {
 		AjaxMsg msg = new AjaxMsg("1", "登录成功");
-		try{
-			Account request_Account = getModel(Account.class);
+		try {
+			Account reqAccount = getModel(Account.class);
 			boolean forgetPwd = getParaToBoolean("forgetPass");
-			
-			Account account = Account.dao.findByName(request_Account.getStr(Account.NAME));
-			if(null == account){
-				msg = new AjaxMsg("0", "账号不存在");
-			} else {
-				if(MD5EncryptKit.isEqual(request_Account.getStr(Account.PASSWORD), account.getStr(Account.PASSWORD))){
-					this.setSessionAttr("UserAgent", account);
-					if(forgetPwd){
-						Cookie cookie = new Cookie("mall_User", account.getStr(Account.NAME) + ":" + request_Account.getStr(Account.PASSWORD));
-						this.setCookie(cookie);
-					}
-				}else{
-					msg = new AjaxMsg("0", "密码错误");
-				}
-			}
-		}catch(Exception ex){
-			logger.error("登录异常：", ex);
-			msg = new AjaxMsg("0", "登录异常：" + ex);
+			Subject currUser = SecurityUtils.getSubject();
+			String username = reqAccount.getStr(Account.NAME);
+			String password = reqAccount.getStr(Account.PASSWORD);
+			UsernamePasswordToken uToken = new UsernamePasswordToken(username, password);
+			uToken.setRememberMe(forgetPwd);
+			currUser.login(uToken);
+		} catch (AuthenticationException authex) {
+			msg = new AjaxMsg("0", authex.getMessage());
+			logger.error(msg.getRetMsg(), authex);
+		} catch (Exception ex) {
+			msg = new AjaxMsg("0", ex.getMessage());
+			logger.error(msg.getRetMsg(), ex);
 		}
 		this.renderJson(msg);
 	}
-	
+
 	/**
 	 * 退出登录
 	 */
-	public void loginOut(){
-		this.removeSessionAttr("UserAgent");
-		redirect("login");
+	public void logout() {
+		Subject currUser = SecurityUtils.getSubject();
+		currUser.logout();
 	}
-	
+
 	/**
 	 * 修改密码
 	 */
-	public void change(){
-		
+	public void change() {
+
 	}
-	
+
 	/**
 	 * 找回密码
 	 */
-	public void findPwd(){
-		
+	public void findPwd() {
+
 	}
 }

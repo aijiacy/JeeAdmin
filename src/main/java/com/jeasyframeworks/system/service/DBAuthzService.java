@@ -1,4 +1,4 @@
-package com.jeasyframeworks.system.service.shiro;
+package com.jeasyframeworks.system.service;
 
 import java.util.Collections;
 import java.util.Comparator;
