@@ -1,4 +1,4 @@
-package com.jeasyframeworks.system.constants;
+package com.jeasyframeworks.core.constants;
 
 import java.util.List;
 

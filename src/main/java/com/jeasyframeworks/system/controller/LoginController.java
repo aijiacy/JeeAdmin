@@ -5,10 +5,10 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 
+import com.jeasyframeworks.core.constants.AjaxMsg;
 import com.jeasyframeworks.core.controller.BaseController;
 import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
 import com.jeasyframeworks.extentions.shiro.annotation.ClearShiro;
-import com.jeasyframeworks.system.constants.AjaxMsg;
 import com.jeasyframeworks.system.model.Account;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.log.Logger;
