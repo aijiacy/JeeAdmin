@@ -17,14 +17,14 @@ public class Dictionary extends BaseModel<Dictionary> {
 	public static final String TYPE = "type";
 	public static final String FK_PID = "pid";
 	
-	public static final Dictionary dao = new Dictionary();
+	public static final Dictionary me = new Dictionary();
 	
 	public Dictionary getParent(){
-		return dao.findById(getStr(FK_PID));
+		return findById(getStr(FK_PID));
 	}
 	
 	public List<Dictionary> getChilden(){
-		return dao.find(SqlKit.sql("Dictionary.findByPid"), getStr(PK_ID));
+		return find(SqlKit.sql("Dictionary.findByPid"), getStr(PK_ID));
 	}
 
 }

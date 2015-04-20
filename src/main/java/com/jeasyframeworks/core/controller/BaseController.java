@@ -16,7 +16,7 @@ public abstract class BaseController<T extends BaseModel<?>> extends Controller 
 		return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
-	public abstract T getModelDAO();
+	protected abstract T getModelDAO();
 	
 	public void save() {
 		AjaxMsg msg = new AjaxMsg(1, "保存数据成功!");

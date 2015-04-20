@@ -2,5 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
 <sqlGroup name="Group" >
       <sql id="findAll">select * from sys_groups</sql>
+      <sql id="findByPid">select * from sys_groups group where group.pid = ?</sql>
       <sql id="findByAccId">select sg.* from sys_groups sg, sys_group_account sga where sg.uuid = sga.groupid and sga.accid = ?</sql>
+      <sql id="groupAddRole">insert into sys_group_role(uuid,groupid,roleid) values(?,?,?)</sql>
+      <sql id="groupAddAccount">insert into sys_group_account(uuid,groupid,accid) values(?,?,?)</sql>
 </sqlGroup>

@@ -15,7 +15,7 @@ public class Role extends BaseModel<Role>{
 	public static final String NAME = "name";
 	public static final String CODE = "code";
 
-	public static final Role dao = new Role();
+	public static final Role me = new Role();
 	
 	public List<Role> findAll(){
 		return this.find(SqlKit.sql("Role.findAll"));

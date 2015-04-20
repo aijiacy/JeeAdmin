@@ -39,7 +39,7 @@ public class DBAuthzService implements DBAuthzLoader {
 		 * 例如 function /system/menus/add
 		 */
 		//获取所有角色
-		List<Role> roles = Role.dao.findAll();
+		List<Role> roles = Role.me.findAll();
 		List<Permission> permissions = null;
 		for (Role role : roles) {
 			permissions = Permission.dao.findByRoleId(role.getStr(Role.PK_ID));

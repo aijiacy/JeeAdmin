@@ -44,7 +44,7 @@ public class SystemAuthRealm extends AuthorizingRealm {
 			Account account = null;
 			String username = userToken.getUsername();
 			String password = String.valueOf(userToken.getPassword());
-			account = Account.dao.findByName(username);
+			account = Account.me.findByName(username);
 			if (account != null) {
 					if(MD5EncryptKit.isEqual(password, account.getStr(Account.PASSWORD))){
 						SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(account, password, getName());
@@ -77,12 +77,12 @@ public class SystemAuthRealm extends AuthorizingRealm {
 		Set<String> setRoles = new LinkedHashSet<String>(); // 角色集合
 		Set<String> setPermissions = new LinkedHashSet<String>(); // 权限集合
 		List<Role> userRoles = null;
-		Account account = Account.dao.findByName(loginName);
+		Account account = Account.me.findByName(loginName);
 		if (account == null) {
 			SecurityUtils.getSubject().logout();
 		} else {
-			userRoles = Role.dao.findByAccId(account.getStr(Account.PK_ID));
-			List<Group> groups = Group.dao.findByAccId(account
+			userRoles = Role.me.findByAccId(account.getStr(Account.PK_ID));
+			List<Group> groups = Group.me.findByAccId(account
 					.getStr(Account.PK_ID));
 			if (groups != null && !groups.isEmpty()) {
 				String[] gIds = new String[groups.size()];
@@ -91,7 +91,7 @@ public class SystemAuthRealm extends AuthorizingRealm {
 					gIds[i] = group.getStr(Group.PK_ID);
 					i++;
 				}
-				List<Role> groupRoles = Role.dao.findByGroupIds(gIds);
+				List<Role> groupRoles = Role.me.findByGroupIds(gIds);
 				userRoles.removeAll(groupRoles);
 				userRoles.addAll(groupRoles);
 			}

@@ -1,8 +1,7 @@
 package com.jeasyframeworks.core.model;
 
-import java.util.UUID;
-
 import com.jeasyframeworks.extentions.table.annotation.TableBind;
+import com.jeasyframeworks.toolkit.uuid.UUIDKit;
 import com.jfinal.plugin.activerecord.Model;
 
 public abstract class BaseModel<T extends Model<?>> extends Model<T> {
@@ -18,7 +17,7 @@ public abstract class BaseModel<T extends Model<?>> extends Model<T> {
 	@Override
 	public boolean save() {
 		TableBind tb = (TableBind) getClass().getAnnotation(TableBind.class);
-		this.getAttrs().put(tb.pkName(), UUID.randomUUID().toString().toUpperCase().replaceAll("-", ""));
+		this.getAttrs().put(tb.pkName(), UUIDKit.generate());
 		return super.save();
 	}
 

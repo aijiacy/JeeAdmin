@@ -77,8 +77,8 @@ public class LoginController extends BaseController<Account> {
 	}
 
 	@Override
-	public Account getModelDAO() {
+	protected Account getModelDAO() {
 		// TODO Auto-generated method stub
-		return Account.dao;
+		return Account.me;
 	}
 }

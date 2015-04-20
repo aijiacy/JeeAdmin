@@ -20,6 +20,6 @@ public class User extends BaseModel<User>{
 	public static final User dao = new User();
 	
 	public Account getAccount(){
-		return Account.dao.findFirst(SqlKit.sql("Acount.findByUserId"), this.getStr(PK_ID));
+		return Account.me.findFirst(SqlKit.sql("Acount.findByUserId"), this.getStr(PK_ID));
 	}
 }

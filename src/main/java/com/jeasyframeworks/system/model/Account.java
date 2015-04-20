@@ -18,13 +18,13 @@ public class Account extends BaseModel<Account> {
 	public static final String SUPER = "super";
 	public static final String LOCK_STATUS = "lockStatus";
 	
-	public static final Account dao = new Account();
+	public static final Account me = new Account();
 	
 	public Account findByName(String name){
-		return this.findFirst(SqlKit.sql("Account.findByName"), name);
+		return findFirst(SqlKit.sql("Account.findByName"), name);
 	}
 	
 	public User getUser(){
-		return User.dao.findById(getStr(FK_USERID));
+		return User.dao.findFirst(SqlKit.sql("Account.findByName"), getStr(FK_USERID));
 	}
 }
