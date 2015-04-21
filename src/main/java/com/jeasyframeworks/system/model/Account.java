@@ -25,6 +25,6 @@ public class Account extends BaseModel<Account> {
 	}
 	
 	public User getUser(){
-		return User.dao.findFirst(SqlKit.sql("Account.findByName"), getStr(FK_USERID));
+		return User.me.findById(getStr(FK_USERID));
 	}
 }

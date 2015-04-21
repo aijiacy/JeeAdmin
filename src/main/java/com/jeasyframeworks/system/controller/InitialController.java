@@ -14,6 +14,7 @@ public class InitialController extends Controller {
 	@ClearShiro
 	public void index() {
 		initData();
+		this.renderNull();
 	}
 
 	private void initData() {

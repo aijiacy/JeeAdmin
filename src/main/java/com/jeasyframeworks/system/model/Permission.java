@@ -13,7 +13,7 @@ public class Permission extends BaseModel<Permission>{
 	
 	public static final String PK_ID = "uuid";
 
-	public static final Permission dao = new Permission();
+	public static final Permission me = new Permission();
 	
 	public List<Permission> findByRoleId(String roleId){
 		return this.find(SqlKit.sql("Permission.findByRoleId"), roleId);

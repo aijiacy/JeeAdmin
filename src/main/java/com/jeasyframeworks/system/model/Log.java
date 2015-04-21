@@ -14,5 +14,5 @@ public class Log extends BaseModel<Log> {
 			OP_USER = "op_user",
 			OP_DESC = "op_desc";
 
-	public static final Log dao = new Log();
+	public static final Log me = new Log();
 }

@@ -106,7 +106,7 @@ public class SystemAuthRealm extends AuthorizingRealm {
 		List<Permission> permissions = null;
 		for (Role role : roles) {
 			setRoles.add(role.getStr(Role.CODE));
-			permissions = Permission.dao.findByRoleId(role.getStr(Role.PK_ID));
+			permissions = Permission.me.findByRoleId(role.getStr(Role.PK_ID));
 			loadPermissions(setPermissions, permissions);
 		}
 	}
@@ -116,15 +116,15 @@ public class SystemAuthRealm extends AuthorizingRealm {
 		List<Menu> menus = null;
 		List<Function> functions = null;
 		for (Permission permission : permissions) {
-			platforms = Platform.dao.findByPermissionId(permission.getStr(Permission.PK_ID));
+			platforms = Platform.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 			for (Platform platform : platforms) {
 				setPermissions.add(platform.getStr(Platform.CODE));
 			}
-			menus = Menu.dao.findByPermissionId(permission.getStr(Permission.PK_ID));
+			menus = Menu.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 			for (Menu menu : menus) {
 				setPermissions.add(menu.getStr(Platform.CODE));
 			}
-			functions = Function.dao.findByPermissionId(permission.getStr(Permission.PK_ID));
+			functions = Function.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 			for (Function function : functions) {
 				setPermissions.add(function.getStr(Platform.CODE));
 			}

@@ -21,7 +21,7 @@ public class Menu extends BaseModel<Menu>{
 	public static final String SORT = "sort";
 	public static final String ACTIVATE = "activate";
 	
-	public static final Menu dao = new Menu();
+	public static final Menu me = new Menu();
 	
 	public List<Menu> findByPermissionId(String permissionId){
 		return this.find(SqlKit.sql("Menu.findByPermissionId"), permissionId);

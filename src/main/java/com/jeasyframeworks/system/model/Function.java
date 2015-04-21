@@ -19,7 +19,7 @@ public class Function extends BaseModel<Function> {
 	public static final String ACTION_URL = "actionUrl";
 	public static final String FK_MENU_ID = "menuid";
 
-	public static final Function dao = new Function();
+	public static final Function me = new Function();
 	
 	public List<Function> findByPermissionId(String permissionId){
 		return this.find(SqlKit.sql("Function.findByPermissionId"), permissionId);

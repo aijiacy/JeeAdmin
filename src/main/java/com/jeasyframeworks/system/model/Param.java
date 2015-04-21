@@ -7,5 +7,5 @@ import com.jeasyframeworks.extentions.table.annotation.TableBind;
 public class Param extends BaseModel<Param> {
 	private static final long serialVersionUID = 1L;
 
-	public static final Param dao = new Param();
+	public static final Param me = new Param();
 }

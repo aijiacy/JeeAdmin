@@ -17,7 +17,7 @@ public class User extends BaseModel<User>{
 	public static final String TELPHONE = "telphone";
 	public static final String ADDRESS = "address";
 	
-	public static final User dao = new User();
+	public static final User me = new User();
 	
 	public Account getAccount(){
 		return Account.me.findFirst(SqlKit.sql("Acount.findByUserId"), this.getStr(PK_ID));

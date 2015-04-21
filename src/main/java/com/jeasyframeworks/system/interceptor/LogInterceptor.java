@@ -24,8 +24,7 @@ public class LogInterceptor implements Interceptor{
 			log.put(Log.OP_USER, "NONE(" + hostAddr + ")");
 		}
 		log.put(Log.OP_DESC, ctrl.getClass().getName());
-		Log.dao.setAttrs(log);
-		Log.dao.save();
+		log.save();
 		ai.invoke();
 	}
 

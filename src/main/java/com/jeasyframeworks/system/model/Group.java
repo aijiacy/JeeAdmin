@@ -24,15 +24,15 @@ public class Group extends BaseModel<Group>{
 	}
 	
 	public Group getParent(){
-		return this.findById(Group.me.getStr(Group.PID));
+		return this.findById(getStr(PID));
 	}
 	
 	public List<Group> getChildren(){
-		return this.find(SqlKit.sql("Group.findByPid"), Group.me.getStr(Group.PID));
+		return this.find(SqlKit.sql("Group.findByPid"), getStr(PID));
 	}
 	
 	public boolean allocRole(String roleId){
-		int k = Db.update(SqlKit.sql("Group.groupAddRole"), UUIDKit.generate(), getStr(Group.PK_ID), roleId);
+		int k = Db.update(SqlKit.sql("Group.groupAddRole"), UUIDKit.generate(), getStr(PK_ID), roleId);
 		if(k > 0){
 			return true;
 		}
@@ -40,7 +40,7 @@ public class Group extends BaseModel<Group>{
 	}
 	
 	public boolean allocAccount(String accId){
-		int k = Db.update(SqlKit.sql("Group.groupAddAccount"), UUIDKit.generate(), getStr(Group.PK_ID), accId);
+		int k = Db.update(SqlKit.sql("Group.groupAddAccount"), UUIDKit.generate(), getStr(PK_ID), accId);
 		if(k > 0){
 			return true;
 		}

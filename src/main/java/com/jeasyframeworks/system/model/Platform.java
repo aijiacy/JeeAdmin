@@ -17,7 +17,7 @@ public class Platform extends BaseModel<Platform> {
 	public static final String URL = "url";
 	public static final String DESC = "desc";
 	
-	public static final Platform dao = new Platform();
+	public static final Platform me = new Platform();
 	
 	public List<Platform> findAll(){
 		return this.find(SqlKit.sql("Platform.findAll"));
