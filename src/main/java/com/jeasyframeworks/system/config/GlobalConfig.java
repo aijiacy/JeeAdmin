@@ -98,7 +98,7 @@ public class GlobalConfig extends JFinalConfig {
 
 	@Override
 	public void configHandler(Handlers me) {
-		DruidStatViewHandler dsv = new DruidStatViewHandler("/moniter",
+		DruidStatViewHandler dsv = new DruidStatViewHandler("/system/moniter",
 				new IDruidStatViewAuth() {
 					@Override
 					public boolean isPermitted(HttpServletRequest request) {
