@@ -52,7 +52,7 @@ public class GlobalConfig extends JFinalConfig {
 		this.routes = me;
 		RoutesBind routesBind = new RoutesBind();
 		routesBind.autoScan(false);
-		routesBind.addIncludePaths("com.jeasyframeworks.platform.controller");
+		routesBind.addIncludePaths("com.jeasyframeworks.system.controller");
 		me.add(routesBind);
 	}
 
