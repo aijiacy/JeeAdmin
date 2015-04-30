@@ -3,6 +3,7 @@ package com.jeasyframeworks.system.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.subject.Subject;
 
 import com.jeasyframeworks.core.constants.AjaxMsg;
@@ -25,6 +26,7 @@ public class LoginController extends BaseController<Account> {
 	private static final Logger logger = Logger.getLogger(LoginController.class);
 
 	@ClearInterceptor
+	@ClearShiro
 	public void index() {
 		render("login.html");
 	}
