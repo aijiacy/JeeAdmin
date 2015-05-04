@@ -14,21 +14,23 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <!-- 
     <dependency>
     	<groupId>com.jfinal</groupId>
     	<artifactId>jetty-server</artifactId>
     	<version>8.1.8</version>
     	<scope>provided</scope>
     </dependency>
-	<dependency>
-		<groupId>mysql</groupId>
-		<artifactId>mysql-connector-java</artifactId>
-		<version>5.1.30</version>
-	</dependency>
+     -->
 	<dependency>
 		<groupId>com.jfinal</groupId>
 		<artifactId>jfinal</artifactId>
 		<version>1.9</version>
+	</dependency>
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.30</version>
 	</dependency>
 	<dependency>
 		<groupId>com.jfinal</groupId>
