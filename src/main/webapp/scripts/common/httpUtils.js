@@ -3,7 +3,8 @@
  */
 (function(window, angular, undefined) {
 	'use strict';
-	angular.module( 'httpUtils',
+	angular.module(
+					'httpUtils',
 					[ 'ng' ],
 					function($httpProvider) {
 						// Use x-www-form-urlencoded Content-Type
@@ -60,4 +61,4 @@
 									: data;
 						} ];
 					});
-});
+})(window, window.angular);

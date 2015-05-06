@@ -3,7 +3,7 @@ package com.jeasyframeworks.system.controller;
 import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
 import com.jfinal.core.Controller;
 
-@ControllerKey(controllerKey="/system/main")
+@ControllerKey(controllerKey="/system/portail")
 public class MainController extends Controller{
 	
 	public void index(){

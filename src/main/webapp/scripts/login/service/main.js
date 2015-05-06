@@ -1,0 +1,1 @@
+define(['scripts/login/service/loginService'], function(){});
