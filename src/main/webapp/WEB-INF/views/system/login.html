@@ -11,21 +11,21 @@
 <link type="text/css" rel="stylesheet" href="plugins/bootstrap/3.3.4/css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="plugins/bootstrap/3.3.4/css/bootstrap-theme.min.css" />
 <link type="text/css" rel="stylesheet" href="styles/default/login/singin.css" />
-<script type="text/javascript" src="plugins/require/2.1.17/require.min.js" data-main="scripts/config"></script>
 </head>
 <body>
 	<div class="container" ng-controller="loginCtrl" >
-		<form id="loginForm" class="form-signin" role="form">
+		<form class="form-signin">
 			<h2 class="form-signin-heading">JeeAdmin sign in</h2>
-			<input type="text" id="loginName" name="loginName" ng-model="loginData.account.name" class="form-control" placeholder="User Name" required="required" autofocus="" />
-			<input type="password" id="loginPass" name="loginPass" ng-model="loginData.account.password" class="form-control" placeholder="Password" required="required">
+			<input type="text" id="loginName" name="loginName" ng-model="loginData.account.name" class="form-control" placeholder="User Name" required="" autofocus="" />
+			<input type="password" id="inputPassword" name="loginPass" class="form-control" placeholder="Password" required="">
 			<div class="checkbox">
-				<label> <input type="checkbox" value="remember-me" ng-model="loginData.forgetPass" />
+				<label> <input type="checkbox" value="remember-me">
 					Remember me
 				</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" ng-click="doLogin()" role="button">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 		</form>
 	</div>
+<script type="text/javascript" src="plugins/require/2.1.17/require.min.js" data-main="scripts/config"></script>
 </body>
 </html>
