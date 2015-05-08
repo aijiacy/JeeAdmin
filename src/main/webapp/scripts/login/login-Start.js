@@ -1,5 +1,6 @@
 define([ 'require',
          'angular',
+         'angular-route',
          'common-HttpUtils',
          'login-Loader',
          'login-App'],
