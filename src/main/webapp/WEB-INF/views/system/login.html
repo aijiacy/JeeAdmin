@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<link type="image/x-icon" rel="shortcut icon" href="images/favicons/favicon.ico" />
+<link type="image/x-icon" rel="icon" href="images/favicons/favicon.ico" />
+<link type="image/x-icon" rel="bookmark" href="images/favicons/favicon.ico" />
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JeeAdmin Login</title>
-<link type="image/x-icon" rel="shortcut icon" href="images/favicons/favicon.ico" />
-<link type="image/x-icon" rel="icon" href="images/favicons/favicon.ico" />
-<link type="image/x-icon" rel="bookmark" href="images/favicons/favicon.ico" />
 <link type="text/css" rel="stylesheet" href="plugins/bootstrap/3.3.4/css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="plugins/bootstrap/3.3.4/css/bootstrap-theme.min.css" />
 <link type="text/css" rel="stylesheet" href="styles/default/login/singin.css" />
@@ -17,15 +17,15 @@
 		<form class="form-signin">
 			<h2 class="form-signin-heading">JeeAdmin sign in</h2>
 			<input type="text" id="loginName" name="loginName" ng-model="loginData.account.name" class="form-control" placeholder="User Name" required="" autofocus="" />
-			<input type="password" id="inputPassword" name="loginPass" class="form-control" placeholder="Password" required="">
+			<input type="password" id="inputPassword" name="loginPass" ng-model="loginData.account.password" class="form-control" placeholder="Password" required="">
 			<div class="checkbox">
 				<label> <input type="checkbox" value="remember-me">
 					Remember me
 				</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block" ng-click="doLogin();" >Sign in</button>
 		</form>
 	</div>
-<script type="text/javascript" src="plugins/require/2.1.17/require.min.js" data-main="scripts/config"></script>
+<script type="text/javascript" src="plugins/require/2.1.17/require.min.js" data-main="scripts/login/login-Option"></script>
 </body>
 </html>

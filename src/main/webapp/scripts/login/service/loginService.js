@@ -1,7 +1,7 @@
 /**
  * 
  */
-define([ 'scripts/login/loginApp' ], function(loginApp) {
+define([ 'login-App' ], function(loginApp) {
 	'use strict';
 	loginApp.service("loginSvr", [
 			'$http',
@@ -15,20 +15,15 @@ define([ 'scripts/login/loginApp' ], function(loginApp) {
 						"checkCode" : '',
 						"forgetPass" : false
 					},
-					login : function(data) {
+					login : function(data, fn) {
 						var param = data;
-						$http.post('system/login', param).success(
+						$http.post('system/login', param)
+						.success(
 								function(data, status) {
-									console.log(data);
-									console.log(status);
-									if (data.code == "1") {
-										//window.location.href = "system/main";
-										$location.path('system/main');
-									}
+									fn(data, status);
 								}).error(function(data, status) {
-							console.log(data);
-							console.log(status);
-						});
+									fn(data, status);
+								});
 					}
 				};
 				return lgnSvr;

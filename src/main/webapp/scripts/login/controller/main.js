@@ -1,1 +1,0 @@
-define(['scripts/login/controller/loginController'], function(){});

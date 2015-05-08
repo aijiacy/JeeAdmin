@@ -1,7 +1,6 @@
 /**
  * login module
  */
-
 define([ 'angular' ], function(angular) {
-	return angular.module('loginApp', []);
+	return angular.module('loginApp', [ 'httpUtils' ]);
 });
