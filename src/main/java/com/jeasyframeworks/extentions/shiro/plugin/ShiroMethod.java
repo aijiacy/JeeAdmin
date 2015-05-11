@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jeasyframeworks.extentions.shiro;
+package com.jeasyframeworks.extentions.shiro.plugin;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;

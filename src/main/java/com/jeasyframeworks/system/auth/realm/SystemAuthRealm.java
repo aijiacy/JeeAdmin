@@ -1,4 +1,4 @@
-package com.jeasyframeworks.system.service;
+package com.jeasyframeworks.system.auth.realm;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -122,11 +122,11 @@ public class SystemAuthRealm extends AuthorizingRealm {
 			}
 			menus = Menu.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 			for (Menu menu : menus) {
-				setPermissions.add(menu.getStr(Platform.CODE));
+				setPermissions.add(menu.getStr(Menu.CODE));
 			}
 			functions = Function.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 			for (Function function : functions) {
-				setPermissions.add(function.getStr(Platform.CODE));
+				setPermissions.add(function.getStr(Function.CODE));
 			}
 		}
 	}

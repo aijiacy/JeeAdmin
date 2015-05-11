@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.jeasyframeworks.extentions.shiro.DBAuthzLoader;
 import com.jeasyframeworks.extentions.shiro.handler.AuthzHandler;
-import com.jeasyframeworks.extentions.shiro.handler.DBPermissionAuthzHandler;
+import com.jeasyframeworks.extentions.shiro.handler.PermissionJdbcAuthzHandler;
+import com.jeasyframeworks.extentions.shiro.plugin.AuthzJdbcLoader;
 import com.jeasyframeworks.system.model.Function;
 import com.jeasyframeworks.system.model.Menu;
 import com.jeasyframeworks.system.model.Permission;
@@ -16,10 +16,10 @@ import com.jeasyframeworks.system.model.Platform;
 import com.jeasyframeworks.system.model.Role;
 import com.jfinal.kit.StrKit;
 
-public class DBAuthzService implements DBAuthzLoader {
+public class AuthzJdbcService implements AuthzJdbcLoader {
 
 	@Override
-	public Map<String, AuthzHandler> getDBAuthz() {
+	public Map<String, AuthzHandler> getJdbcAuthz() {
 		// TODO 
 		//按长度倒序排列url
 		Map<String, AuthzHandler> dbAuthzMaps = Collections.synchronizedMap(new TreeMap<String, AuthzHandler>(
@@ -34,9 +34,10 @@ public class DBAuthzService implements DBAuthzLoader {
 	        }));
 		/**
 		 * 权限表必须包含 name code url 字段 url作为key
-		 * 例如 platform /system
-		 * 例如 menu     /system/menus
-		 * 例如 function /system/menus/add
+		 * 例如 role     /system/
+		 * 例如 platform /system/**
+		 * 例如 menu     /system/menus/**
+		 * 例如 function /system/menus/add**
 		 */
 		//获取所有角色
 		List<Role> roles = Role.me.findAll();
@@ -50,19 +51,19 @@ public class DBAuthzService implements DBAuthzLoader {
 				platforms = Platform.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 				for (Platform platform : platforms) {
 					if(StrKit.notBlank(platform.getStr(Platform.URL))){
-						dbAuthzMaps.put(platform.getStr(Platform.URL), new DBPermissionAuthzHandler(platform.getStr(Platform.CODE)));
+						dbAuthzMaps.put(platform.getStr(Platform.URL), new PermissionJdbcAuthzHandler(platform.getStr(Platform.CODE)));
 					}
 				}
 				menus = Menu.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 				for (Menu menu : menus) {
 					if(StrKit.notBlank(menu.getStr(Menu.URL)) && (menu.getInt(Menu.ACTIVATE) == 1)){
-						dbAuthzMaps.put(menu.getStr(Platform.URL), new DBPermissionAuthzHandler(menu.getStr(Platform.CODE)));
+						dbAuthzMaps.put(menu.getStr(Menu.URL), new PermissionJdbcAuthzHandler(menu.getStr(Menu.CODE)));
 					}
 				}
 				functions = Function.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 				for (Function function : functions) {
-					if(StrKit.notBlank(function.getStr(Menu.URL))){
-						dbAuthzMaps.put(function.getStr(Platform.URL), new DBPermissionAuthzHandler(function.getStr(Platform.CODE)));
+					if(StrKit.notBlank(function.getStr(Function.ACTION_URL))){
+						dbAuthzMaps.put(function.getStr(Function.ACTION_URL), new PermissionJdbcAuthzHandler(function.getStr(Function.CODE)));
 					}
 				}
 			}

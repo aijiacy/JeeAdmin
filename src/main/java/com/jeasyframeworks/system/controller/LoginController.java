@@ -8,9 +8,7 @@ import org.apache.shiro.subject.Subject;
 import com.jeasyframeworks.core.constants.AjaxMsg;
 import com.jeasyframeworks.core.controller.BaseController;
 import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
-import com.jeasyframeworks.extentions.shiro.annotation.ClearShiro;
 import com.jeasyframeworks.system.model.Account;
-import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.log.Logger;
 
 /**
@@ -19,12 +17,11 @@ import com.jfinal.log.Logger;
  * @author caoyong
  *
  */
-@ControllerKey(controllerKey = "/system")
+@ControllerKey(controllerKey = "/")
 public class LoginController extends BaseController<Account> {
 
 	private static final Logger logger = Logger.getLogger(LoginController.class);
 
-	@ClearInterceptor
 	public void index() {
 		render("login.html");
 	}
@@ -32,7 +29,6 @@ public class LoginController extends BaseController<Account> {
 	/**
 	 * 用户登录
 	 */
-	@ClearShiro
 	public void login() {
 		AjaxMsg msg = new AjaxMsg(1, "登录成功");
 		try {
@@ -44,6 +40,10 @@ public class LoginController extends BaseController<Account> {
 			UsernamePasswordToken uToken = new UsernamePasswordToken(username, password);
 			uToken.setRememberMe(forgetPwd);
 			currUser.login(uToken);
+			if(!currUser.isAuthenticated()){
+				msg = new AjaxMsg(0, "验证失败");
+				logger.error(msg.getRetMsg());
+			}
 		} catch (AuthenticationException authex) {
 			msg = new AjaxMsg(0, authex.getMessage());
 			logger.error(msg.getRetMsg(), authex);
