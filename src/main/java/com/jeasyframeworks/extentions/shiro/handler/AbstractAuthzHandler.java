@@ -22,7 +22,7 @@ import org.apache.shiro.subject.Subject;
  * 访问控制抽象基类
  * @author dafei
  */
-public abstract class AbstractAuthzHandler implements AuthzHandler {
+abstract class AbstractAuthzHandler implements AuthzHandler {
 
 	/**
 	 * 获得Shiro的Subject对象。

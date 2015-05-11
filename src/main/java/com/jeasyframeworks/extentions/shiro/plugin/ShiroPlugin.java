@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,8 +32,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.RequiresUser;
 
-import com.jeasyframeworks.extentions.shiro.DBAuthzLoader;
-import com.jeasyframeworks.extentions.shiro.ShiroKit;
 import com.jeasyframeworks.extentions.shiro.annotation.ClearShiro;
 import com.jeasyframeworks.extentions.shiro.handler.AuthenticatedAuthzHandler;
 import com.jeasyframeworks.extentions.shiro.handler.AuthzHandler;
@@ -40,6 +39,7 @@ import com.jeasyframeworks.extentions.shiro.handler.CompositeAuthzHandler;
 import com.jeasyframeworks.extentions.shiro.handler.GuestAuthzHandler;
 import com.jeasyframeworks.extentions.shiro.handler.PermissionAuthzHandler;
 import com.jeasyframeworks.extentions.shiro.handler.RoleAuthzHandler;
+import com.jeasyframeworks.extentions.shiro.handler.RoleJdbcAuthzHandler;
 import com.jeasyframeworks.extentions.shiro.handler.UserAuthzHandler;
 import com.jfinal.config.Routes;
 import com.jfinal.core.ActionKey;
@@ -48,7 +48,6 @@ import com.jfinal.plugin.IPlugin;
 
 /**
  * Shiro插件，启动时加载所有Shiro访问控制注解。
- * 
  * @author dafei
  *
  */
@@ -61,35 +60,35 @@ public class ShiroPlugin implements IPlugin {
 	 * Shiro的几种访问控制注解
 	 */
 	private static final Class<? extends Annotation>[] AUTHZ_ANNOTATION_CLASSES = new Class[] {
-			RequiresPermissions.class, RequiresRoles.class, RequiresUser.class, RequiresGuest.class,
-			RequiresAuthentication.class };
+			RequiresPermissions.class, RequiresRoles.class, RequiresUser.class,
+			RequiresGuest.class, RequiresAuthentication.class };
 
-	/**
-	 * 数据权限加载器
-	 */
-	private final DBAuthzLoader dbAuthzLoader;
-	
 	/**
 	 * 路由设定
 	 */
 	private final Routes routes;
-
+	/**
+	 * 数据库权限加载
+	 */
+	private final AuthzJdbcLoader authzJdbcLoader;
 	/**
 	 * 构造函数
-	 * 
-	 * @param routes
-	 *            路由设定
+	 * @param routes 路由设定
 	 */
-	public ShiroPlugin(Routes routes, DBAuthzLoader dbAuthzLoader) {
+	public ShiroPlugin(Routes routes){
+		this(routes, null);
+	}
+	
+	public ShiroPlugin(Routes routes, AuthzJdbcLoader authzJdbcLoader) {
 		this.routes = routes;
-		this.dbAuthzLoader = dbAuthzLoader;
+		this.authzJdbcLoader = authzJdbcLoader;
 	}
 
 	/**
 	 * 停止插件
 	 */
 	@Override
-	public boolean stop() {
+    public boolean stop() {
 		return true;
 	}
 
@@ -97,12 +96,23 @@ public class ShiroPlugin implements IPlugin {
 	 * 启动插件
 	 */
 	@Override
-	public boolean start() {
+    public boolean start() {
+		ConcurrentMap<String, AuthzHandler> allAuthzMaps = new ConcurrentHashMap<String, AuthzHandler>();
+		allAuthzMaps.putAll(loadAnnotationAuthz());
+		//注入到ShiroKit类中。ShiroKit类以单例模式运行。
+		ShiroKit.init(allAuthzMaps);
+		return true;
+	}
+	
+	private ConcurrentMap<String, AuthzHandler> loadAnnotationAuthz(){
 		Set<String> excludedMethodName = buildExcludedMethodName();
 		ConcurrentMap<String, AuthzHandler> authzMaps = new ConcurrentHashMap<String, AuthzHandler>();
-		// 逐个访问所有注册的Controller，解析Controller及action上的所有Shiro注解。
-		// 并依据这些注解，actionKey提前构建好权限检查处理器。
-		for (Entry<String, Class<? extends Controller>> entry : routes.getEntrySet()) {
+		//Jdbc权限加载，只装载一次
+		Map<String, AuthzHandler> jdbcAuthzMaps = this.getAuthzJdbc();
+		//逐个访问所有注册的Controller，解析Controller及action上的所有Shiro注解。
+		//并依据这些注解，actionKey提前构建好权限检查处理器。
+		for (Entry<String, Class<? extends Controller>> entry : routes
+				.getEntrySet()) {
 			Class<? extends Controller> controllerClass = entry.getValue();
 
 			String controllerKey = entry.getKey();
@@ -112,34 +122,32 @@ public class ShiroPlugin implements IPlugin {
 			// 逐个遍历方法。
 			Method[] methods = controllerClass.getMethods();
 			for (Method method : methods) {
-				// 排除掉Controller基类的所有方法，并且只关注没有参数的Action方法。
-				if (!excludedMethodName.contains(method.getName()) && method.getParameterTypes().length == 0) {
-					// 若该方法上存在ClearShiro注解，则对该action不进行访问控制检查。
-					if (isClearShiroAnnotationPresent(method)) {
+				//排除掉Controller基类的所有方法，并且只关注没有参数的Action方法。
+				if (!excludedMethodName.contains(method.getName())
+						&& method.getParameterTypes().length == 0) {
+					//若该方法上存在ClearShiro注解，则对该action不进行访问控制检查。
+					if(isClearShiroAnnotationPresent(method)){
 						continue;
 					}
-					// 获取方法的所有Shiro注解。
+					//获取方法的所有Shiro注解。
 					List<Annotation> methodAnnotations = getAuthzAnnotations(method);
-					// 依据Controller的注解和方法的注解来生成访问控制处理器。
-					AuthzHandler authzHandler = createAuthzHandler(controllerAnnotations, methodAnnotations);
-					// 生成访问控制处理器成功。
+					//构建ActionKey，参考ActionMapping中实现
+					String actionKey = createActionKey(controllerClass, method, controllerKey);
+					//依据Controller的注解和方法的注解来生成访问控制处理器。
+					AuthzHandler authzHandler = createAuthzHandler(actionKey, controllerAnnotations, methodAnnotations, jdbcAuthzMaps);
+					//生成访问控制处理器成功。
 					if (authzHandler != null) {
-						// 构建ActionKey，参考ActionMapping中实现
-						String actionKey = createActionKey(controllerClass, method, controllerKey);
-						// 添加映射
+						//添加映射
 						authzMaps.put(actionKey, authzHandler);
 					}
 				}
 			}
 		}
-		// 注入到ShiroKit类中。ShiroKit类以单例模式运行。
-		ShiroKit.init(authzMaps, this.dbAuthzLoader);
-		return true;
+		return authzMaps;
 	}
 
 	/**
 	 * 从Controller方法中构建出需要排除的方法列表
-	 * 
 	 * @return
 	 */
 	private Set<String> buildExcludedMethodName() {
@@ -154,20 +162,22 @@ public class ShiroPlugin implements IPlugin {
 
 	/**
 	 * 依据Controller的注解和方法的注解来生成访问控制处理器。
-	 * 
-	 * @param controllerAnnotations
-	 *            Controller的注解
-	 * @param methodAnnotations
-	 *            方法的注解
+	 * @param controllerAnnotations  Controller的注解
+	 * @param methodAnnotations 方法的注解
+	 * @param jdbcAuthzMaps 数据库权限集合
 	 * @return 访问控制处理器
 	 */
-	private AuthzHandler createAuthzHandler(List<Annotation> controllerAnnotations, List<Annotation> methodAnnotations) {
+	private AuthzHandler createAuthzHandler(
+			String actionKey,
+			List<Annotation> controllerAnnotations,
+			List<Annotation> methodAnnotations,
+			Map<String, AuthzHandler> jdbcAuthzMaps) {
 
-		// 没有注解
+		//没有注解
 		if (controllerAnnotations.size() == 0 && methodAnnotations.size() == 0) {
 			return null;
 		}
-		// 至少有一个注解
+		//至少有一个注解
 		List<AuthzHandler> authzHandlers = new ArrayList<AuthzHandler>(5);
 		for (int index = 0; index < 5; index++) {
 			authzHandlers.add(null);
@@ -177,6 +187,8 @@ public class ShiroPlugin implements IPlugin {
 		scanAnnotation(authzHandlers, controllerAnnotations);
 		// 逐个扫描注解，若是相应的注解则在相应的位置赋值。函数的注解优先级高于Controller
 		scanAnnotation(authzHandlers, methodAnnotations);
+		// 扫描数据库权限
+		scanJdbc(actionKey, authzHandlers, jdbcAuthzMaps);
 
 		// 去除空值
 		List<AuthzHandler> finalAuthzHandlers = new ArrayList<AuthzHandler>();
@@ -195,13 +207,15 @@ public class ShiroPlugin implements IPlugin {
 	}
 
 	/**
-	 * 逐个扫描注解，若是相应的注解则在相应的位置赋值。 注解的处理是有顺序的，依次为RequiresRoles，RequiresPermissions，
+	 * 逐个扫描注解，若是相应的注解则在相应的位置赋值。
+	 * 注解的处理是有顺序的，依次为RequiresRoles，RequiresPermissions，
 	 * RequiresAuthentication，RequiresUser，RequiresGuest
 	 *
 	 * @param authzArray
 	 * @param annotations
 	 */
-	private void scanAnnotation(List<AuthzHandler> authzArray, List<Annotation> annotations) {
+	private void scanAnnotation(List<AuthzHandler> authzArray,
+			List<Annotation> annotations) {
 		if (null == annotations || 0 == annotations.size()) {
 			return;
 		}
@@ -209,14 +223,29 @@ public class ShiroPlugin implements IPlugin {
 			if (a instanceof RequiresRoles) {
 				authzArray.set(0, new RoleAuthzHandler(a));
 			} else if (a instanceof RequiresPermissions) {
-				authzArray.set(1, new PermissionAuthzHandler(a));
+				authzArray.set(2, new PermissionAuthzHandler(a));
 			} else if (a instanceof RequiresAuthentication) {
-				authzArray.set(2, AuthenticatedAuthzHandler.me());
+				authzArray.set(4, AuthenticatedAuthzHandler.me());
 			} else if (a instanceof RequiresUser) {
-				authzArray.set(3, UserAuthzHandler.me());
+				authzArray.set(5, UserAuthzHandler.me());
 			} else if (a instanceof RequiresGuest) {
-				authzArray.set(4, GuestAuthzHandler.me());
+				authzArray.set(6, GuestAuthzHandler.me());
 			}
+		}
+	}
+	
+	private void scanJdbc(String actionKey, List<AuthzHandler> authzArray, Map<String, AuthzHandler> jdbcAuthzMaps){
+		if(null == jdbcAuthzMaps || 0 == jdbcAuthzMaps.size()){
+			return;
+		}
+		AuthzHandler authzHandler = jdbcAuthzMaps.get(actionKey);
+		if(null == authzHandler){
+			return;
+		}
+		if(authzHandler instanceof RoleJdbcAuthzHandler){
+			authzArray.set(1, authzHandler);
+		} else if(authzHandler instanceof PermissionAuthzHandler){
+			authzArray.set(3, authzHandler);
 		}
 	}
 
@@ -228,7 +257,8 @@ public class ShiroPlugin implements IPlugin {
 	 * @param controllerKey
 	 * @return
 	 */
-	private String createActionKey(Class<? extends Controller> controllerClass, Method method, String controllerKey) {
+	private String createActionKey(Class<? extends Controller> controllerClass,
+			Method method, String controllerKey) {
 		String methodName = method.getName();
 		String actionKey = "";
 
@@ -236,13 +266,14 @@ public class ShiroPlugin implements IPlugin {
 		if (ak != null) {
 			actionKey = ak.value().trim();
 			if ("".equals(actionKey))
-				throw new IllegalArgumentException(controllerClass.getName() + "." + methodName
-						+ "(): The argument of ActionKey can not be blank.");
+				throw new IllegalArgumentException(controllerClass.getName() + "." + methodName + "(): The argument of ActionKey can not be blank.");
 			if (!actionKey.startsWith(SLASH))
 				actionKey = SLASH + actionKey;
-		} else if (methodName.equals("index")) {
+		}
+		else if (methodName.equals("index")) {
 			actionKey = controllerKey;
-		} else {
+		}
+		else {
 			actionKey = controllerKey.equals(SLASH) ? SLASH + methodName : controllerKey + SLASH + methodName;
 		}
 		return actionKey;
@@ -271,7 +302,8 @@ public class ShiroPlugin implements IPlugin {
 	 * @param method
 	 * @return
 	 */
-	private List<Annotation> getAuthzAnnotations(Class<? extends Controller> targetClass) {
+	private List<Annotation> getAuthzAnnotations(
+			Class<? extends Controller> targetClass) {
 		List<Annotation> annotations = new ArrayList<Annotation>();
 		for (Class<? extends Annotation> annClass : AUTHZ_ANNOTATION_CLASSES) {
 			Annotation a = targetClass.getAnnotation(annClass);
@@ -281,10 +313,13 @@ public class ShiroPlugin implements IPlugin {
 		}
 		return annotations;
 	}
-
+	
+	private Map<String, AuthzHandler> getAuthzJdbc(){
+		return this.authzJdbcLoader.getJdbcAuthz();
+	}
+	
 	/**
 	 * 该方法上是否有ClearShiro注解
-	 * 
 	 * @param method
 	 * @return
 	 */

@@ -12,7 +12,7 @@ import com.jeasyframeworks.extentions.shiro.plugin.ShiroPlugin;
 import com.jeasyframeworks.extentions.sqlxml.plugin.SqlInXmlPlugin;
 import com.jeasyframeworks.extentions.table.plugin.TableBindPlugin;
 import com.jeasyframeworks.system.interceptor.LogInterceptor;
-import com.jeasyframeworks.system.service.DBAuthzService;
+import com.jeasyframeworks.system.service.AuthzJdbcService;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -83,10 +83,10 @@ public class GlobalConfig extends JFinalConfig {
 		
 		//sqlInXml插件
 		me.add(new SqlInXmlPlugin());
+		//Shiro权限框架
+	    me.add(new ShiroPlugin(routes, new AuthzJdbcService()));
 		//ehcache缓存插件
 		me.add(new EhCachePlugin());
-		//Shiro权限框架
-	    me.add(new ShiroPlugin(routes, new DBAuthzService()));
 		
 	}
 

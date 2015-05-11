@@ -15,12 +15,11 @@
  */
 package com.jeasyframeworks.extentions.shiro.interceptor;
 
-import com.jeasyframeworks.extentions.shiro.ShiroKit;
-import com.jeasyframeworks.extentions.shiro.handler.AuthzHandler;
-
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
 
+import com.jeasyframeworks.extentions.shiro.handler.AuthzHandler;
+import com.jeasyframeworks.extentions.shiro.plugin.ShiroKit;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 
