@@ -19,13 +19,14 @@ public abstract class BaseController<T extends BaseModel<?>> extends Controller 
 	protected abstract T getModelDAO();
 	
 	public void save() {
-		AjaxMsg msg = new AjaxMsg(1, "保存数据成功!");
+		AjaxMsg msg = new AjaxMsg(true, 1, "保存数据成功!");
 		try {
 			getModel(getModelClass()).save();
 		} catch (Exception ex) {
-			msg.setRetCode(0);
-			msg.setRetMsg("保存数据失败");
-			logger.error(msg.getRetMsg(), ex);
+			msg.setOpResult(false);
+			msg.setOpCode(0);
+			msg.setOpDesc("保存数据失败");
+			logger.error(msg.getOpDesc(), ex);
 		}
 		this.renderJson(msg);
 	}
@@ -36,25 +37,27 @@ public abstract class BaseController<T extends BaseModel<?>> extends Controller 
 	
 	public void delete(){
 		String id = getPara(0);
-		AjaxMsg msg = new AjaxMsg(1, "删除数据成功!");
+		AjaxMsg msg = new AjaxMsg(true, 1, "删除数据成功!");
 		try{
 			this.getModelDAO().deleteById(id);
 		} catch (Exception ex){
-			msg.setRetCode(0);
-			msg.setRetMsg("删除数据失败");
-			logger.error("Id:[" + id + "]，" + msg.getRetMsg(), ex);
+			msg.setOpResult(false);
+			msg.setOpCode(0);
+			msg.setOpDesc("删除数据失败");
+			logger.error("Id:[" + id + "]，" + msg.getOpDesc(), ex);
 		}
 		this.renderJson(msg);
 	}
 	
 	public void update(){
-		AjaxMsg msg = new AjaxMsg(1, "更新数据成功!");
+		AjaxMsg msg = new AjaxMsg(true, 1, "更新数据成功!");
 		try{
 			this.getModel(getModelClass()).update();
 		} catch (Exception ex){
-			msg.setRetCode(0);
-			msg.setRetMsg("更新数据失败");
-			logger.error(msg.getRetMsg(), ex);
+			msg.setOpResult(false);
+			msg.setOpCode(0);
+			msg.setOpDesc("更新数据失败");
+			logger.error(msg.getOpDesc(), ex);
 		}
 		this.renderJson(msg);
 	}

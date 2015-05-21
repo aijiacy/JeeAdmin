@@ -17,7 +17,7 @@ import com.jfinal.log.Logger;
  * @author caoyong
  *
  */
-@ControllerKey(controllerKey = "/")
+@ControllerKey(controllerKey = "/system")
 public class LoginController extends BaseController<Account> {
 
 	private static final Logger logger = Logger.getLogger(LoginController.class);
@@ -30,7 +30,7 @@ public class LoginController extends BaseController<Account> {
 	 * 用户登录
 	 */
 	public void login() {
-		AjaxMsg msg = new AjaxMsg(1, "登录成功");
+		AjaxMsg msg = new AjaxMsg(true, 1, "登录成功");
 		try {
 			Account reqAccount = getModel(Account.class);
 			boolean forgetPwd = getParaToBoolean("forgetPass");
@@ -41,15 +41,15 @@ public class LoginController extends BaseController<Account> {
 			uToken.setRememberMe(forgetPwd);
 			currUser.login(uToken);
 			if(!currUser.isAuthenticated()){
-				msg = new AjaxMsg(0, "验证失败");
-				logger.error(msg.getRetMsg());
+				msg = new AjaxMsg(true, 0, "验证未通过！");
+				logger.error(msg.getOpDesc());
 			}
 		} catch (AuthenticationException authex) {
-			msg = new AjaxMsg(0, authex.getMessage());
-			logger.error(msg.getRetMsg(), authex);
+			msg = new AjaxMsg(false, 2, authex.getMessage());
+			logger.error(msg.getOpDesc(), authex);
 		} catch (Exception ex) {
-			msg = new AjaxMsg(0, ex.getMessage());
-			logger.error(msg.getRetMsg(), ex);
+			msg = new AjaxMsg(false, 3, "异常：" + ex.getMessage());
+			logger.error(msg.getOpDesc(), ex);
 		}
 		this.renderJson(msg);
 	}

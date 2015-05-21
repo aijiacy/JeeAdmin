@@ -50,10 +50,10 @@ public class SystemAuthRealm extends AuthorizingRealm {
 						SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(account, password, getName());
 						return authInfo;
 					} else {
-						throw new AuthenticationException("密码错误");
+						throw new AuthenticationException("密码错误!");
 					}
 			} else {
-				throw new AuthenticationException("用户不存在");
+				throw new AuthenticationException("用户不存在!");
 			}
 		} catch(Exception ex) {
 			throw new AuthenticationException("用户验证失败:" + ex);

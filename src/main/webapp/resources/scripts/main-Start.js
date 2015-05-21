@@ -2,7 +2,7 @@ define([ 'require',
          'jquery',
          'angular',
          'angular-animate',
-         'adm-HttpUtils',
+         'common-HttpUtils',
          'main-App'],
          function(require, $, angular) {
 			require([ 'domReady!' ], function(doc) {

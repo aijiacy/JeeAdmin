@@ -36,6 +36,7 @@ public class EncryptionTextKit {
 	 * @throws Exception
 	 *             exception
 	 */
+	@SuppressWarnings("restriction")
 	public EncryptionTextKit(String strKey) throws Exception {
 		Security.addProvider(new com.sun.crypto.provider.SunJCE());
 		Key key = getKey(strKey.getBytes());

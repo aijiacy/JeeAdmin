@@ -9,12 +9,12 @@ public class AjaxDataMsg<T> extends AjaxMsg {
 	private int rowCnt = 0;
 	private List<T> data = null;
 
-	public AjaxDataMsg(int retCode, String retMsg) {
-		super(retCode, retMsg);
+	public AjaxDataMsg(boolean opResult, int opCode, String opDesc) {
+		this(opResult, opCode, opDesc, -1, null);
 	}
 
-	public AjaxDataMsg(int retCode, String retMsg, int rowCnt, List<T> data) {
-		super(retCode, retMsg);
+	public AjaxDataMsg(boolean opResult, int opCode, String opDesc, int rowCnt, List<T> data) {
+		super(opResult, opCode, opDesc);
 		this.rowCnt = rowCnt;
 		this.data = data;
 	}

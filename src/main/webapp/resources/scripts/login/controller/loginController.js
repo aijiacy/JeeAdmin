@@ -10,10 +10,10 @@ define([ 'angular', 'login-App' ], function(angular, loginApp) {
 					loginSvr.login($scope.loginData, function(data, status){
 						console.log(status + ":" + data);
 						if(status === 200){
-							if(data.retCode === 1){
-								window.location.href='portail';
+							if(data.opResult && (data.opCode === 1)){
+								window.location.href='system/portail';
 							} else {
-								alert('登录失败：' + data.retMsg);
+								alert('登录失败：' + data.opDesc);
 							}
 						} else {
 							alert('登录异常，请稍后再试！');

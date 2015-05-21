@@ -17,7 +17,7 @@ define([ 'login-App' ], function(loginApp) {
 					},
 					login : function(data, fn) {
 						var param = data;
-						$http.post('login', param)
+						$http.post('system/login', param)
 						.success(
 								function(data, status) {
 									fn(data, status);

@@ -4,28 +4,39 @@ import com.jfinal.kit.JsonKit;
 
 public class AjaxMsg implements Message {
 	private static final long serialVersionUID = 1L;
-	private int retCode;
-	private String retMsg;
+	private boolean opResult = true;
+	private int opCode;
+	private String opDesc;
 
-	public AjaxMsg(int retCode, String retMsg) {
-		this.retCode = retCode;
-		this.retMsg = retMsg;
+	public AjaxMsg(boolean opResult, int opCode, String opDesc) {
+		super();
+		this.opResult = opResult;
+		this.opCode = opCode;
+		this.opDesc = opDesc;
 	}
 
-	public int getRetCode() {
-		return retCode;
+	public boolean isOpResult() {
+		return opResult;
 	}
 
-	public void setRetCode(int retCode) {
-		this.retCode = retCode;
+	public void setOpResult(boolean opResult) {
+		this.opResult = opResult;
 	}
 
-	public String getRetMsg() {
-		return retMsg;
+	public int getOpCode() {
+		return opCode;
 	}
 
-	public void setRetMsg(String retMsg) {
-		this.retMsg = retMsg;
+	public void setOpCode(int opCode) {
+		this.opCode = opCode;
+	}
+
+	public String getOpDesc() {
+		return opDesc;
+	}
+
+	public void setOpDesc(String opDesc) {
+		this.opDesc = opDesc;
 	}
 
 	public String toJson() {
