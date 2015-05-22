@@ -1,4 +1,4 @@
-package com.jeasyframeworks.system.auth.realm;
+package com.jeasyframeworks.system.authc.realm;
 
 import java.util.LinkedHashSet;
 import java.util.List;
