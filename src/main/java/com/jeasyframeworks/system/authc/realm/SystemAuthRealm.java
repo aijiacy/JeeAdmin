@@ -76,8 +76,7 @@ public class SystemAuthRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principal) {
 		// TODO 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用.
-		String loginName = ((Account) principal.fromRealm(getName()).iterator()
-				.next()).getStr(Account.NAME);
+		String loginName = ((Account) principal.fromRealm(getName()).iterator().next()).getStr(Account.USERNAME);
 		SimpleAuthorizationInfo authInfo = new SimpleAuthorizationInfo();
 		Set<String> setRoles = new LinkedHashSet<String>(); // 角色集合
 		Set<String> setPermissions = new LinkedHashSet<String>(); // 权限集合

@@ -17,13 +17,14 @@
 	<div class="container" ng-controller="loginCtrl" >
 		<form class="form-signin">
 			<h2 class="form-signin-heading">JeeAdmin sign in</h2>
-			<input type="text" id="loginName" name="loginName" ng-model="loginData.account.name" class="form-control" placeholder="User Name" required="" autofocus="" />
-			<input type="password" id="inputPassword" name="loginPass" ng-model="loginData.account.password" class="form-control" placeholder="Password" required="">
+			<input type="text" id="username" name="username" ng-model="loginData.account.username" class="form-control" placeholder="User Name" required="" autofocus="" />
+			<input type="password" id="password" name="password" ng-model="loginData.account.password" class="form-control" placeholder="Password" required="">
 			<div class="checkbox">
-				<label> <input type="checkbox" value="remember-me">
+				<label> <input ng-model="loginData.rememberMe" type="checkbox" value="remember-me">
 					Remember me
 				</label>
 			</div>
+			{{loginData.rememberMe}}
 			<button class="btn btn-lg btn-primary btn-block" ng-click="doLogin();" >Sign in</button>
 		</form>
 	</div>

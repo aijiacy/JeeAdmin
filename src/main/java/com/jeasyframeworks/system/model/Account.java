@@ -10,7 +10,7 @@ public class Account extends BaseModel<Account> {
 	private static final long serialVersionUID = 1L;
 	
 	public static final String PK_ID = "uuid";
-	public static final String NAME = "name";
+	public static final String USERNAME = "username";
 	public static final String PASSWORD = "password";
 	public static final String EMAIL = "email";
 	public static final String MOBILE = "mobile";
@@ -20,8 +20,8 @@ public class Account extends BaseModel<Account> {
 	
 	public static final Account me = new Account();
 	
-	public Account findByName(String name){
-		return findFirst(SqlKit.sql("Account.findByName"), name);
+	public Account findByName(String username){
+		return findFirst(SqlKit.sql("Account.findByName"), username);
 	}
 	
 	public User getUser(){

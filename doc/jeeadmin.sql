@@ -123,7 +123,7 @@ DROP TABLE IF EXISTS `jeeadmin`.`sys_accounts` ;
 
 CREATE TABLE IF NOT EXISTS `jeeadmin`.`sys_accounts` (
   `uuid` VARCHAR(36) NOT NULL,
-  `name` VARCHAR(45) NOT NULL COMMENT '账号名',
+  `username` VARCHAR(45) NOT NULL COMMENT '账号名',
   `password` VARCHAR(48) NOT NULL COMMENT '账号密码',
   `email` VARCHAR(45) NOT NULL COMMENT '绑定邮箱',
   `mobile` VARCHAR(45) NOT NULL COMMENT '绑定手机',

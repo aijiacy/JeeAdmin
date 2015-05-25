@@ -21,7 +21,7 @@ public class InitialController extends Controller {
 		try {
 			//初始化账户
 			Account account = new Account();
-			account.put(Account.NAME, "admin");
+			account.put(Account.USERNAME, "admin");
 			account.put(Account.PASSWORD, MD5EncryptKit.encrypt("123456"));
 			account.put(Account.MOBILE, "18999284959");
 			account.put(Account.EMAIL, "cymsn81@126.com");

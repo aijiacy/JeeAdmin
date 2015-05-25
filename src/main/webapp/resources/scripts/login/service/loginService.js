@@ -9,11 +9,11 @@ define([ 'login-App' ], function(loginApp) {
 				var lgnSvr = {
 					loginData : {
 						"account" : {
-							"name" : 'admin',
+							"username" : 'admin',
 							"password" : ''
 						},
-						"checkCode" : '',
-						"forgetPass" : false
+						"captcha" : '',
+						"rememberMe" : false
 					},
 					login : function(data, fn) {
 						var param = data;

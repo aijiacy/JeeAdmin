@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sqlGroup name="Account" >
-      <sql id="findByName">select * from sys_accounts account where account.name = ?</sql>
+      <sql id="findByName">select * from sys_accounts account where account.username = ?</sql>
       <sql id="findByUserId">select * from sys_accounts account where account.userid = ?</sql>
 </sqlGroup>

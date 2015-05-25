@@ -17,7 +17,7 @@ public class LogInterceptor implements Interceptor{
 		log.put(Log.OP_NAME, ctrl.getClass().getSimpleName());
 		log.put(Log.OP_ACTION, ai.getActionKey());
 		if(SecurityUtils.getSubject().isAuthenticated()){
-			String opUser = ((Account)SecurityUtils.getSubject().getPrincipal()).getStr(Account.NAME) + "(" + SecurityUtils.getSubject().getSession().getHost()+ ")";
+			String opUser = ((Account)SecurityUtils.getSubject().getPrincipal()).getStr(Account.USERNAME) + "(" + SecurityUtils.getSubject().getSession().getHost()+ ")";
 			log.put(Log.OP_USER, opUser);
 		} else {
 			String hostAddr = ai.getController().getRequest().getRemoteHost();

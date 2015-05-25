@@ -37,14 +37,14 @@ public class LoginController extends BaseController<Account> {
 	public void login() {
 		AjaxMsg msg = new AjaxMsg(true, MsgConsts.LOGIN_SUCCESS);
 		try {
-			Account reqAccount = getModel(Account.class);
+			Account reqParams = getModel(Account.class);
+			String username = reqParams.getStr(Account.USERNAME);
+			String password = reqParams.getStr(Account.PASSWORD);
 			String captcha = getPara("captcha");
-			boolean forgetPwd = getParaToBoolean("forgetPass");
+			boolean rememberMe = getParaToBoolean("rememberMe");
+			UsernamePasswordCaptchaToken uToken = new UsernamePasswordCaptchaToken(username, password, rememberMe, getRequest().getRemoteHost(), captcha);
+
 			Subject currUser = SecurityUtils.getSubject();
-			String username = reqAccount.getStr(Account.NAME);
-			String password = reqAccount.getStr(Account.PASSWORD);
-			UsernamePasswordCaptchaToken uToken = new UsernamePasswordCaptchaToken(username,
-					password, forgetPwd, getRequest().getRemoteHost(), captcha);
 			currUser.login(uToken);
 			if (!currUser.isAuthenticated()) {
 				msg = new AjaxMsg(true, 0, "验证未通过！");
