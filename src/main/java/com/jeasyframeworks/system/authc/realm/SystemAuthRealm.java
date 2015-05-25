@@ -1,5 +1,7 @@
 package com.jeasyframeworks.system.authc.realm;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,7 +11,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.Cache;
@@ -17,6 +18,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 
+import com.jeasyframeworks.exception.UsernamePasswordException;
+import com.jeasyframeworks.extentions.shiro.authc.UsernamePasswordCaptchaToken;
 import com.jeasyframeworks.system.model.Account;
 import com.jeasyframeworks.system.model.Function;
 import com.jeasyframeworks.system.model.Group;
@@ -39,25 +42,27 @@ public class SystemAuthRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken authToken) throws AuthenticationException {
 		// TODO Shiro登录认证
-		try{
-			UsernamePasswordToken userToken = (UsernamePasswordToken) authToken;
+		try {
+			UsernamePasswordCaptchaToken userToken = (UsernamePasswordCaptchaToken) authToken;
 			Account account = null;
 			String username = userToken.getUsername();
 			String password = String.valueOf(userToken.getPassword());
 			account = Account.me.findByName(username);
 			if (account != null) {
-					if(MD5EncryptKit.isEqual(password, account.getStr(Account.PASSWORD))){
-						SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(account, password, getName());
-						return authInfo;
-					} else {
-						throw new AuthenticationException("密码错误!");
-					}
+				if (MD5EncryptKit.isEqual(password, account.getStr(Account.PASSWORD))) {
+					SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(account, password, getName());
+					return authInfo;
+				} else {
+					throw new UsernamePasswordException("密码错误");
+				}
+
 			} else {
-				throw new AuthenticationException("用户不存在!");
+				throw new UsernamePasswordException("用户名不存在");
 			}
-		} catch(Exception ex) {
-			throw new AuthenticationException("用户验证失败:" + ex);
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			throw new UsernamePasswordException("密码加密比对异常");
 		}
+
 	}
 
 	/**
@@ -102,7 +107,8 @@ public class SystemAuthRealm extends AuthorizingRealm {
 		return authInfo;
 	}
 
-	private void loadRoles(Set<String> setRoles, Set<String> setPermissions, List<Role> roles){
+	private void loadRoles(Set<String> setRoles, Set<String> setPermissions,
+			List<Role> roles) {
 		List<Permission> permissions = null;
 		for (Role role : roles) {
 			setRoles.add(role.getStr(Role.CODE));
@@ -110,27 +116,31 @@ public class SystemAuthRealm extends AuthorizingRealm {
 			loadPermissions(setPermissions, permissions);
 		}
 	}
-	
-	private void loadPermissions(Set<String> setPermissions, List<Permission> permissions){
+
+	private void loadPermissions(Set<String> setPermissions,
+			List<Permission> permissions) {
 		List<Platform> platforms = null;
 		List<Menu> menus = null;
 		List<Function> functions = null;
 		for (Permission permission : permissions) {
-			platforms = Platform.me.findByPermissionId(permission.getStr(Permission.PK_ID));
+			platforms = Platform.me.findByPermissionId(permission
+					.getStr(Permission.PK_ID));
 			for (Platform platform : platforms) {
 				setPermissions.add(platform.getStr(Platform.CODE));
 			}
-			menus = Menu.me.findByPermissionId(permission.getStr(Permission.PK_ID));
+			menus = Menu.me.findByPermissionId(permission
+					.getStr(Permission.PK_ID));
 			for (Menu menu : menus) {
 				setPermissions.add(menu.getStr(Menu.CODE));
 			}
-			functions = Function.me.findByPermissionId(permission.getStr(Permission.PK_ID));
+			functions = Function.me.findByPermissionId(permission
+					.getStr(Permission.PK_ID));
 			for (Function function : functions) {
 				setPermissions.add(function.getStr(Function.CODE));
 			}
 		}
 	}
-	
+
 	/**
 	 * 更新用户授权信息缓存.
 	 */

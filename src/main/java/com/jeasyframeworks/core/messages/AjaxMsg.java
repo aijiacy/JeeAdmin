@@ -1,12 +1,21 @@
-package com.jeasyframeworks.core.constants;
+package com.jeasyframeworks.core.messages;
 
-import com.jfinal.kit.JsonKit;
+import com.jeasyframeworks.core.constants.MsgConsts;
 
 public class AjaxMsg implements Message {
 	private static final long serialVersionUID = 1L;
 	private boolean opResult = true;
 	private int opCode;
 	private String opDesc;
+	
+	
+
+	public AjaxMsg(boolean opResult, MsgConsts consts) {
+		super();
+		this.opResult = opResult;
+		this.opCode = consts.getCode();
+		this.opDesc = consts.getMsg();
+	}
 
 	public AjaxMsg(boolean opResult, int opCode, String opDesc) {
 		super();
@@ -37,9 +46,5 @@ public class AjaxMsg implements Message {
 
 	public void setOpDesc(String opDesc) {
 		this.opDesc = opDesc;
-	}
-
-	public String toJson() {
-		return JsonKit.toJson(this);
 	}
 }

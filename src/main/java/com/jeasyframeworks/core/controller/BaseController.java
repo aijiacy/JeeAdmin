@@ -2,7 +2,7 @@ package com.jeasyframeworks.core.controller;
 
 import java.lang.reflect.ParameterizedType;
 
-import com.jeasyframeworks.core.constants.AjaxMsg;
+import com.jeasyframeworks.core.messages.AjaxMsg;
 import com.jeasyframeworks.core.model.BaseModel;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Logger;

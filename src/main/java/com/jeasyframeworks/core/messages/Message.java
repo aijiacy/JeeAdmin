@@ -1,4 +1,4 @@
-package com.jeasyframeworks.core.constants;
+package com.jeasyframeworks.core.messages;
 
 import java.io.Serializable;
 
