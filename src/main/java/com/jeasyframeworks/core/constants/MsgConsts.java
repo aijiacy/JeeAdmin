@@ -1,18 +1,31 @@
 package com.jeasyframeworks.core.constants;
 
 public enum MsgConsts {
-	LOGIN_SUCCESS(0, "登录成功."), LOGIN_NAMEANDPWD_ERR(1, "用户名不存在或密码错误"), LOGIN_CAPTCHA_ERR(
-			2, "验证码错误"), LOGIN_OTHER_ERR(3, "其他错误");
+	LOGIN_SUCCESS			("0000", "login.success"), 
+	LOGIN_NAMEANDPWD_ERR	("0001", "login.nameandpwd.err"), 
+	LOGIN_CAPTCHA_ERR		("0002", "login.captcha.err"), 
+	OTHER_ERR				("0003", "other.err"),
+	OPER_SAVE_SUCCESS		("1000", "oper.save.success"),
+	OPER_SAVE_FAILED		("1001", "oper.save.failed"),
+	OPER_DEL_SUCCESS		("1010", "oper.del.success"),
+	OPER_DEL_FAILED			("1011", "oper.del.failed"),
+	OPER_BATCH_DEL_SUCCESS	("1110", "oper.batch.del.success"),
+	OPER_BATCH_DEL_FAILED	("1111", "oper.batch.del.failed"),
+	OPER_UPD_SUCCESS		("1020", "oper.upd.success"),
+	OPER_UPD_FAILED			("1021", "oper.upd.failed"),
+	OPER_SEL_LIST_SUCCESS	("1030", "oper.sel.list.success"),
+	OPER_SEL_LIST_FAILED	("1031", "oper.sel.list.failed");
+	
 
-	private final int code;
+	private final String code;
 	private final String msg;
 
-	private MsgConsts(int code, String msg) {
+	private MsgConsts(String code, String msg) {
 		this.code = code;
 		this.msg = msg;
 	}
 
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
 

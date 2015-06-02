@@ -5,7 +5,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
 
 import com.jeasyframeworks.core.constants.MsgConsts;
-import com.jeasyframeworks.core.controller.BaseController;
+import com.jeasyframeworks.core.constants.SessionConsts;
 import com.jeasyframeworks.core.messages.AjaxMsg;
 import com.jeasyframeworks.exception.CaptchaException;
 import com.jeasyframeworks.exception.UsernamePasswordException;
@@ -13,6 +13,7 @@ import com.jeasyframeworks.extentions.captcha.CaptchaRender;
 import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
 import com.jeasyframeworks.extentions.shiro.authc.UsernamePasswordCaptchaToken;
 import com.jeasyframeworks.system.model.Account;
+import com.jfinal.core.Controller;
 import com.jfinal.log.Logger;
 
 /**
@@ -22,7 +23,7 @@ import com.jfinal.log.Logger;
  *
  */
 @ControllerKey(controllerKey = "/system")
-public class LoginController extends BaseController<Account> {
+public class LoginController extends Controller {
 
 	private static final Logger logger = Logger
 			.getLogger(LoginController.class);
@@ -35,7 +36,7 @@ public class LoginController extends BaseController<Account> {
 	 * 用户登录
 	 */
 	public void login() {
-		AjaxMsg msg = new AjaxMsg(true, MsgConsts.LOGIN_SUCCESS);
+		AjaxMsg msg = new AjaxMsg(true, getOperName(), MsgConsts.LOGIN_SUCCESS);
 		try {
 			Account reqParams = getModel(Account.class);
 			String username = reqParams.getStr(Account.USERNAME);
@@ -47,22 +48,22 @@ public class LoginController extends BaseController<Account> {
 			Subject currUser = SecurityUtils.getSubject();
 			currUser.login(uToken);
 			if (!currUser.isAuthenticated()) {
-				msg = new AjaxMsg(true, 0, "验证未通过！");
+				msg = new AjaxMsg(true, "0", getOperName(), "验证未通过！");
 				logger.error(msg.getOpDesc());
 			}
 		} catch (AuthenticationException aex) {
 			if (aex instanceof UsernamePasswordException) {
-				msg = new AjaxMsg(false, MsgConsts.LOGIN_NAMEANDPWD_ERR);
+				msg = new AjaxMsg(false, getOperName(), MsgConsts.LOGIN_NAMEANDPWD_ERR);
 				logger.error(msg.getOpDesc(), aex);
 			} else if (aex instanceof CaptchaException) {
-				msg = new AjaxMsg(false, MsgConsts.LOGIN_CAPTCHA_ERR);
+				msg = new AjaxMsg(false, getOperName(), MsgConsts.LOGIN_CAPTCHA_ERR);
 				logger.error(msg.getOpDesc(), aex);
 			} else {
-				msg = new AjaxMsg(false, MsgConsts.LOGIN_OTHER_ERR);
+				msg = new AjaxMsg(false, getOperName(), MsgConsts.OTHER_ERR);
 				logger.error(msg.getOpDesc(), aex);
 			}
 		} catch (Exception ex) {
-			msg = new AjaxMsg(false, MsgConsts.LOGIN_OTHER_ERR);
+			msg = new AjaxMsg(false, getOperName(), MsgConsts.OTHER_ERR);
 			logger.error(msg.getOpDesc(), ex);
 		}
 		this.renderJson(msg);
@@ -118,13 +119,13 @@ public class LoginController extends BaseController<Account> {
 			captcha.setFontSize(fontsize, fontsize);
 		}
 		// 干扰线数量 默认0
-		captcha.setLineNum(2);
+		captcha.setLineNum(1);
 		// 噪点数量 默认50
 		captcha.setArtifactNum(30);
 		// 使用字符 去掉0和o 避免难以确认
 		// captcha.setCode("123456789");
 		// 验证码在session里的名字 默认 captcha,创建时间为：名字_time
-		// captcha.setCaptchaName("captcha");
+		captcha.setCaptchaName(SessionConsts.SESSION_CAPTCHA.getValue());
 		// 验证码颜色 默认黑色
 		// captcha.setDrawColor(new Color(255,0,0));
 		// 背景干扰物颜色 默认灰
@@ -136,13 +137,11 @@ public class LoginController extends BaseController<Account> {
 		// 随机色 默认黑验证码 灰背景元素
 		captcha.setRandomColor(true);
 		// 验证码长度
-		captcha.setFontNum(4, 6);
+		captcha.setFontNum(4, 4);
 		render(captcha);
 	}
 
-	@Override
-	protected Account getModelDAO() {
-		// TODO Auto-generated method stub
-		return Account.me;
+	protected String[] getOperName() {
+		return new String[0];
 	}
 }

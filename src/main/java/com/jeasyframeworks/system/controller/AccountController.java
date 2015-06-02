@@ -16,5 +16,10 @@ public class AccountController extends BaseController<Account> {
 		// TODO Auto-generated method stub
 		return Account.me;
 	}
+
+	@Override
+	protected String[] getOperName() {
+		return new String[]{"账户"};
+	}
 	
 }
