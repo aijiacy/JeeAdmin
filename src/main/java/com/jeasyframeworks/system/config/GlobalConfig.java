@@ -20,6 +20,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
+import com.jfinal.i18n.I18N;
 import com.jfinal.plugin.activerecord.cache.EhCache;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -45,6 +46,7 @@ public class GlobalConfig extends JFinalConfig {
 		me.setDevMode(true);
 		me.setViewType(ViewType.JSP);
 		me.setBaseViewPath("WEB-INF/views/");
+		I18N.init("i18n.messages", null, null);
 	}
 
 	@Override

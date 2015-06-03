@@ -1,7 +1,5 @@
 package com.jeasyframeworks.system.authc.realm;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +25,6 @@ import com.jeasyframeworks.system.model.Menu;
 import com.jeasyframeworks.system.model.Permission;
 import com.jeasyframeworks.system.model.Platform;
 import com.jeasyframeworks.system.model.Role;
-import com.jeasyframeworks.toolkit.encrypt.MD5EncryptKit;
 
 public class SystemAuthRealm extends AuthorizingRealm {
 
@@ -39,28 +36,22 @@ public class SystemAuthRealm extends AuthorizingRealm {
 	 * @throws org.apache.shiro.authc.AuthenticationException
 	 */
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(
-			AuthenticationToken authToken) throws AuthenticationException {
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken)
+			throws AuthenticationException {
 		// TODO Shiro登录认证
-		try {
-			UsernamePasswordCaptchaToken userToken = (UsernamePasswordCaptchaToken) authToken;
-			Account account = null;
-			String username = userToken.getUsername();
-			String password = String.valueOf(userToken.getPassword());
-			account = Account.me.findByName(username);
-			if (account != null) {
-				if (MD5EncryptKit.isEqual(password, account.getStr(Account.PASSWORD))) {
-					SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(account, password, getName());
-					return authInfo;
-				} else {
-					throw new UsernamePasswordException("密码错误");
-				}
-
+		UsernamePasswordCaptchaToken userToken = (UsernamePasswordCaptchaToken) authToken;
+		Account account = null;
+		String username = userToken.getUsername();
+		account = Account.me.findByName(username);
+		if (account != null) {
+			SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(account, account.getStr(Account.PASSWORD), getName());
+			if (this.getCredentialsMatcher().doCredentialsMatch(userToken, authInfo)) {
+				return authInfo;
 			} else {
-				throw new UsernamePasswordException("用户名不存在");
+				throw new UsernamePasswordException("密码错误");
 			}
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-			throw new UsernamePasswordException("密码加密比对异常");
+		} else {
+			throw new UsernamePasswordException("用户名不存在");
 		}
 
 	}
@@ -73,10 +64,10 @@ public class SystemAuthRealm extends AuthorizingRealm {
 	 * @return
 	 */
 	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(
-			PrincipalCollection principal) {
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
 		// TODO 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用.
-		String loginName = ((Account) principal.fromRealm(getName()).iterator().next()).getStr(Account.USERNAME);
+		String loginName = ((Account) principal.fromRealm(getName()).iterator().next())
+				.getStr(Account.USERNAME);
 		SimpleAuthorizationInfo authInfo = new SimpleAuthorizationInfo();
 		Set<String> setRoles = new LinkedHashSet<String>(); // 角色集合
 		Set<String> setPermissions = new LinkedHashSet<String>(); // 权限集合
@@ -86,8 +77,7 @@ public class SystemAuthRealm extends AuthorizingRealm {
 			SecurityUtils.getSubject().logout();
 		} else {
 			userRoles = Role.me.findByAccId(account.getStr(Account.PK_ID));
-			List<Group> groups = Group.me.findByAccId(account
-					.getStr(Account.PK_ID));
+			List<Group> groups = Group.me.findByAccId(account.getStr(Account.PK_ID));
 			if (groups != null && !groups.isEmpty()) {
 				String[] gIds = new String[groups.size()];
 				int i = 0;
@@ -106,8 +96,7 @@ public class SystemAuthRealm extends AuthorizingRealm {
 		return authInfo;
 	}
 
-	private void loadRoles(Set<String> setRoles, Set<String> setPermissions,
-			List<Role> roles) {
+	private void loadRoles(Set<String> setRoles, Set<String> setPermissions, List<Role> roles) {
 		List<Permission> permissions = null;
 		for (Role role : roles) {
 			setRoles.add(role.getStr(Role.CODE));
@@ -116,24 +105,20 @@ public class SystemAuthRealm extends AuthorizingRealm {
 		}
 	}
 
-	private void loadPermissions(Set<String> setPermissions,
-			List<Permission> permissions) {
+	private void loadPermissions(Set<String> setPermissions, List<Permission> permissions) {
 		List<Platform> platforms = null;
 		List<Menu> menus = null;
 		List<Function> functions = null;
 		for (Permission permission : permissions) {
-			platforms = Platform.me.findByPermissionId(permission
-					.getStr(Permission.PK_ID));
+			platforms = Platform.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 			for (Platform platform : platforms) {
 				setPermissions.add(platform.getStr(Platform.CODE));
 			}
-			menus = Menu.me.findByPermissionId(permission
-					.getStr(Permission.PK_ID));
+			menus = Menu.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 			for (Menu menu : menus) {
 				setPermissions.add(menu.getStr(Menu.CODE));
 			}
-			functions = Function.me.findByPermissionId(permission
-					.getStr(Permission.PK_ID));
+			functions = Function.me.findByPermissionId(permission.getStr(Permission.PK_ID));
 			for (Function function : functions) {
 				setPermissions.add(function.getStr(Function.CODE));
 			}
@@ -144,8 +129,7 @@ public class SystemAuthRealm extends AuthorizingRealm {
 	 * 更新用户授权信息缓存.
 	 */
 	public void clearCachedAuthorizationInfo(Object principal) {
-		SimplePrincipalCollection principals = new SimplePrincipalCollection(
-				principal, getName());
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
 		clearCachedAuthorizationInfo(principals);
 	}
 

@@ -2,15 +2,14 @@ package com.fastworks.exam;
 
 import java.text.MessageFormat;
 
-import com.jeasyframeworks.core.constants.MsgConsts;
-import com.jeasyframeworks.core.messages.I18nMessage;
+import com.jeasyframeworks.core.constants.MessageConsts;
+import com.jfinal.i18n.I18N;
 
 public class exam {
 	
 	public static void main(String[] args) {
-		String str = I18nMessage.me().getString(MsgConsts.OPER_SAVE_FAILED.getMsg());
-		String[] names = new String[]{"账户"};
-		System.out.println(MessageFormat.format(str, (Object[])names));
+		I18N.init("i18n.messages", null, null);
+		String str = I18N.getText(MessageConsts.OPER_SAVE_FAILED.getMsgKey());
+		System.out.println(MessageFormat.format(str, "账户",""));
 	}
-	
 }

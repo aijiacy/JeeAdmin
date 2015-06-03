@@ -1,6 +1,6 @@
 package com.jeasyframeworks.core.constants;
 
-public enum MsgConsts {
+public enum MessageConsts {
 	LOGIN_SUCCESS			("0000", "login.success"), 
 	LOGIN_NAMEANDPWD_ERR	("0001", "login.nameandpwd.err"), 
 	LOGIN_CAPTCHA_ERR		("0002", "login.captcha.err"), 
@@ -18,19 +18,19 @@ public enum MsgConsts {
 	
 
 	private final String code;
-	private final String msg;
+	private final String msgKey;
 
-	private MsgConsts(String code, String msg) {
+	private MessageConsts(String code, String msgKey) {
 		this.code = code;
-		this.msg = msg;
+		this.msgKey = msgKey;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public String getMsg() {
-		return msg;
+	public String getMsgKey() {
+		return msgKey;
 	}
 
 }

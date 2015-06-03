@@ -4,7 +4,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
 
-import com.jeasyframeworks.core.constants.MsgConsts;
+import com.jeasyframeworks.core.constants.MessageConsts;
 import com.jeasyframeworks.core.constants.SessionConsts;
 import com.jeasyframeworks.core.messages.AjaxMsg;
 import com.jeasyframeworks.exception.CaptchaException;
@@ -14,6 +14,7 @@ import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
 import com.jeasyframeworks.extentions.shiro.authc.UsernamePasswordCaptchaToken;
 import com.jeasyframeworks.system.model.Account;
 import com.jfinal.core.Controller;
+import com.jfinal.i18n.I18N;
 import com.jfinal.log.Logger;
 
 /**
@@ -25,8 +26,7 @@ import com.jfinal.log.Logger;
 @ControllerKey(controllerKey = "/system")
 public class LoginController extends Controller {
 
-	private static final Logger logger = Logger
-			.getLogger(LoginController.class);
+	private static final Logger logger = Logger.getLogger(LoginController.class);
 
 	public void index() {
 		render("login.html");
@@ -36,34 +36,40 @@ public class LoginController extends Controller {
 	 * 用户登录
 	 */
 	public void login() {
-		AjaxMsg msg = new AjaxMsg(true, getOperName(), MsgConsts.LOGIN_SUCCESS);
+		AjaxMsg msg = new AjaxMsg(true, MessageConsts.LOGIN_SUCCESS.getCode(),
+				I18N.getText(MessageConsts.LOGIN_SUCCESS.getMsgKey()));
 		try {
 			Account reqParams = getModel(Account.class);
 			String username = reqParams.getStr(Account.USERNAME);
 			String password = reqParams.getStr(Account.PASSWORD);
 			String captcha = getPara("captcha");
 			boolean rememberMe = getParaToBoolean("rememberMe");
-			UsernamePasswordCaptchaToken uToken = new UsernamePasswordCaptchaToken(username, password, rememberMe, getRequest().getRemoteHost(), captcha);
+			UsernamePasswordCaptchaToken uToken = new UsernamePasswordCaptchaToken(username,
+					password, rememberMe, getRequest().getRemoteHost(), captcha);
 
 			Subject currUser = SecurityUtils.getSubject();
 			currUser.login(uToken);
 			if (!currUser.isAuthenticated()) {
-				msg = new AjaxMsg(true, "0", getOperName(), "验证未通过！");
+				msg = new AjaxMsg(true, "0", "验证未通过！");
 				logger.error(msg.getOpDesc());
 			}
 		} catch (AuthenticationException aex) {
 			if (aex instanceof UsernamePasswordException) {
-				msg = new AjaxMsg(false, getOperName(), MsgConsts.LOGIN_NAMEANDPWD_ERR);
+				msg = new AjaxMsg(false, MessageConsts.LOGIN_NAMEANDPWD_ERR.getCode(),
+						I18N.getText(MessageConsts.LOGIN_NAMEANDPWD_ERR.getMsgKey()));
 				logger.error(msg.getOpDesc(), aex);
 			} else if (aex instanceof CaptchaException) {
-				msg = new AjaxMsg(false, getOperName(), MsgConsts.LOGIN_CAPTCHA_ERR);
+				msg = new AjaxMsg(false, MessageConsts.LOGIN_CAPTCHA_ERR.getCode(),
+						I18N.getText(MessageConsts.LOGIN_CAPTCHA_ERR.getMsgKey()));
 				logger.error(msg.getOpDesc(), aex);
 			} else {
-				msg = new AjaxMsg(false, getOperName(), MsgConsts.OTHER_ERR);
+				msg = new AjaxMsg(false, MessageConsts.OTHER_ERR.getCode(),
+						I18N.getText(MessageConsts.OTHER_ERR.getMsgKey()));
 				logger.error(msg.getOpDesc(), aex);
 			}
 		} catch (Exception ex) {
-			msg = new AjaxMsg(false, getOperName(), MsgConsts.OTHER_ERR);
+			msg = new AjaxMsg(false, MessageConsts.OTHER_ERR.getCode(),
+					I18N.getText(MessageConsts.OTHER_ERR.getMsgKey()));
 			logger.error(msg.getOpDesc(), ex);
 		}
 		this.renderJson(msg);
@@ -94,7 +100,12 @@ public class LoginController extends Controller {
 	}
 
 	public void captcha() {
-		int width = 0, height = 0, minnum = 0, maxnum = 0, fontsize = 0;// , fontmin = 0, fontmax = 0;
+		int width = 0, height = 0, minnum = 0, maxnum = 0, fontsize = 0;/*
+																		 * ,fontmin
+																		 * = 0,
+																		 * fontmax
+																		 * = 0;
+																		 */
 		CaptchaRender captcha = new CaptchaRender();
 		if (isParaExists("width")) {
 			width = getParaToInt("width");
@@ -132,16 +143,13 @@ public class LoginController extends Controller {
 		// captcha.setDrawBgColor(new Color(0,0,0));
 		// 背景色+透明度 前三位数字是rgb色，第四个数字是透明度 默认透明
 		// captcha.setBgColor(new Color(225, 225, 0, 100));
-		// 滤镜特效 默认随机特效 //曲面Curves //大理石纹Marble //弯折Double //颤动Wobble //扩散Diffuse
+		// 滤镜特效 默认随机特效 //曲面Curves //大理石纹Marble //弯折Double //颤动Wobble
+		// //扩散Diffuse
 		captcha.setFilter(CaptchaRender.FilterFactory.Curves);
 		// 随机色 默认黑验证码 灰背景元素
 		captcha.setRandomColor(true);
 		// 验证码长度
 		captcha.setFontNum(4, 4);
 		render(captcha);
-	}
-
-	protected String[] getOperName() {
-		return new String[0];
 	}
 }
