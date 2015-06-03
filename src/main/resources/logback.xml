@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true" debug="true">
-	<substitutionProperty name="log.base" value="./logs/jeeadmin" />
+	<substitutionProperty name="log.dir" value="logs/jeeAdmin" />
 	<jmxConfigurator />
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<!-- pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern-->
-			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{100} - %msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{80} - %msg%n</pattern>
 		</layout>
 	</appender>
-	<appender name="SYSTEMOUT"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="SYSTEMOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Encoding>UTF-8</Encoding>
-		<File>${log.base}.log</File>
+		<!-- <File>${log.dir}.%d{yyyy-MM-dd}.log</File> -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${log.base}.%d{yyyy-MM-dd}.log.zip</FileNamePattern>
+			<FileNamePattern>${log.dir}.%d{yyyy-MM-dd}.log</FileNamePattern>
 		</rollingPolicy>
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{100} - %msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] %logger{80} - %msg%n</pattern>
 		</layout>
 	</appender>
 	<!-- logback为java中的包 -->   
@@ -29,7 +28,7 @@
 	<logger name="com.jfinal" level="ERROR" additivity="false">  
 	  <appender-ref ref="STDOUT"/>  
 	</logger>
-	<logger name="org.apache.shiro" level="ERROR" additivity="false">  
+	<logger name="org.apache" level="ERROR" additivity="false">  
 	  <appender-ref ref="STDOUT"/>  
 	</logger>
 	<root level="ERROR">             
