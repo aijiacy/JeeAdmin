@@ -11,7 +11,7 @@ define([ 'angular', 'login-App' ], function(angular, loginApp) {
 						console.log(status + ":" + data);
 						if(status === 200){
 							if(data.opResult && (data.opCode === "0000")){
-								//window.location.href='system/portail';
+								window.location.href='system/portail';
 							} else {
 								alert('登录失败：' + data.opDesc);
 							}
