@@ -1,9 +1,12 @@
 package com.jeasyframeworks.system.controller;
 
-import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+
+import com.jeasyframeworks.extentions.route.annotation.AnnoController;
 import com.jfinal.core.Controller;
 
-@ControllerKey(controllerKey = "/system/portail")
+@AnnoController(actionKey = "/system/main", view= "")
 public class MainController extends Controller {
 
 	public void index() {
@@ -22,7 +25,12 @@ public class MainController extends Controller {
 		render("help.html");
 	}
 
-	public void main() {
-		render("main.html");
+	public void content() {
+		Subject subject = SecurityUtils.getSubject();
+		if(subject.isAuthenticated()){
+			render("main.html");
+		} else {
+			redirect("/system/login");
+		}
 	}
 }

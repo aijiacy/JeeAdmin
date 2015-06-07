@@ -10,7 +10,7 @@ import com.jeasyframeworks.core.messages.AjaxMsg;
 import com.jeasyframeworks.exception.CaptchaException;
 import com.jeasyframeworks.exception.UsernamePasswordException;
 import com.jeasyframeworks.extentions.captcha.CaptchaRender;
-import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
+import com.jeasyframeworks.extentions.route.annotation.AnnoController;
 import com.jeasyframeworks.extentions.shiro.authc.UsernamePasswordCaptchaToken;
 import com.jeasyframeworks.system.model.Account;
 import com.jfinal.core.Controller;
@@ -23,7 +23,7 @@ import com.jfinal.log.Logger;
  * @author caoyong
  *
  */
-@ControllerKey(controllerKey = "/system")
+@AnnoController(actionKey = "/system/login")
 public class LoginController extends Controller {
 
 	private static final Logger logger = Logger.getLogger(LoginController.class);
@@ -35,7 +35,7 @@ public class LoginController extends Controller {
 	/**
 	 * 用户登录
 	 */
-	public void login() {
+	public void signIn() {
 		AjaxMsg msg = new AjaxMsg(true, MessageConsts.LOGIN_SUCCESS.getCode(),
 				I18N.getText(MessageConsts.LOGIN_SUCCESS.getMsgKey()));
 		try {
@@ -76,16 +76,6 @@ public class LoginController extends Controller {
 	}
 
 	/**
-	 * 退出登录
-	 */
-	public void logout() {
-		Subject currUser = SecurityUtils.getSubject();
-		if (null != currUser) {
-			currUser.logout();
-		}
-	}
-
-	/**
 	 * 修改密码
 	 */
 	public void change() {
@@ -98,6 +88,7 @@ public class LoginController extends Controller {
 	public void findPwd() {
 
 	}
+	
 
 	public void captcha() {
 		int width = 0, height = 0, minnum = 0, maxnum = 0, fontsize = 0;/*

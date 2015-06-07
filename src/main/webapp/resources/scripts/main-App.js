@@ -2,5 +2,9 @@
  * JeeAdmin main application console.
  */
 define([ 'angular' ], function(angular) {
-	return angular.module('mainApp', [ 'ngAnimate', 'httpUtils' ]);
+	var mainApp = angular.module('mainApp', [ 'ngAnimate', 'ngRoute', 'httpUtils' ]);
+	mainApp.config([ '$routeProvider', '$locationProvider', function appConfig($routeProvider, $locationProvider) {
+		$locationProvider.html5Mode(true);
+	}]);
+	return mainApp;
 });

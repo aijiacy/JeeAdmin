@@ -19,7 +19,7 @@ import java.util.List;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
+import com.jeasyframeworks.extentions.route.annotation.AnnoController;
 import com.jeasyframeworks.toolkit.SeachClassKit;
 import com.jfinal.config.Routes;
 import com.jfinal.core.Controller;
@@ -111,33 +111,33 @@ public class RoutesBind extends Routes {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void config() {
 		List<Class<? extends Controller>> controllerClasses = SeachClassKit.of(Controller.class).includeAllJarsInLib(includeAllJarsInLib).injars(includeJars).search();
-		ControllerKey controllerKey = null;
-		for (Class controller : controllerClasses) {
-			if (excludeClasses.contains(controller)) {
+		AnnoController controller = null;
+		for (Class clazz : controllerClasses) {
+			if (excludeClasses.contains(clazz)) {
 				continue;
 			}
-			controllerKey = (ControllerKey) controller.getAnnotation(ControllerKey.class);
-			if (controllerKey == null) {
+			controller = (AnnoController) clazz.getAnnotation(AnnoController.class);
+			if (controller == null) {
 				if (!autoScan) {
 					continue;
 				}
-				this.add(controllerKey(controller), controller);
-				logger.debug("routes.add(" + controllerKey(controller) + ", " + controller.getName() + ")");
-			} else if (StrKit.isBlank(controllerKey.viewPath())) {
-				this.add(controllerKey.controllerKey(), controller);
-				logger.debug("routes.add(" + controllerKey.controllerKey() + ", " + controller.getName() + ")");
+				this.add(getAction(clazz), clazz);
+				logger.debug("routes.add(" + getAction(clazz) + ", " + clazz.getName() + ")");
+			} else if (StrKit.isBlank(controller.view())) {
+				this.add(controller.actionKey(), clazz);
+				logger.debug("routes.add(" + controller.actionKey() + ", " + clazz.getName() + ")");
 			} else {
-				this.add(controllerKey.controllerKey(), controller, controllerKey.viewPath());
-				logger.debug("routes.add(" + controllerKey.controllerKey() + ", " + controller + "," + controllerKey.viewPath() + ")");
+				this.add(controller.actionKey(), clazz, controller.view());
+				logger.debug("routes.add(" + controller.actionKey() + ", " + clazz + "," + controller.view() + ")");
 			}
 		}
 	}
 
-	private String controllerKey(Class<Controller> clazz) {
+	private String getAction(Class<Controller> clazz) {
 		Preconditions.checkArgument(clazz.getSimpleName().endsWith(suffix), clazz.getName() + " is not annotated with @ControllerKey and not end with " + suffix);
-		String controllerKey = "/" + StrKit.firstCharToLowerCase(clazz.getSimpleName());
-		controllerKey = controllerKey.substring(0, controllerKey.indexOf(suffix));
-		return controllerKey;
+		String action = "/" + StrKit.firstCharToLowerCase(clazz.getSimpleName());
+		action = action.substring(0, action.indexOf(suffix));
+		return action;
 	}
 
 	public RoutesBind suffix(String suffix) {

@@ -1,9 +1,9 @@
 /**
  * 
  */
-define([ 'angular', 'login-App' ], function(angular, loginApp) {
+define([ 'angular', 'main-App' ], function(angular, mainApp) {
 	'use strict';
-	loginApp.controller('loginCtrl', [ '$scope', 'loginSvr',
+	mainApp.controller('loginCtrl', [ '$scope', 'loginSvr',
 			function($scope, loginSvr) {
 				$scope.loginData = loginSvr.loginData; // loginService.loginData;
 				$scope.doLogin = function(){
@@ -11,7 +11,7 @@ define([ 'angular', 'login-App' ], function(angular, loginApp) {
 						console.log(status + ":" + data);
 						if(status === 200){
 							if(data.opResult && (data.opCode === "0000")){
-								window.location.href='system/portail';
+								window.location.href='system/main';
 							} else {
 								alert('登录失败：' + data.opDesc);
 							}

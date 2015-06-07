@@ -1,6 +1,6 @@
 package com.jeasyframeworks.system.controller;
 
-import com.jeasyframeworks.extentions.route.annotation.ControllerKey;
+import com.jeasyframeworks.extentions.route.annotation.AnnoController;
 import com.jeasyframeworks.extentions.shiro.annotation.ClearShiro;
 import com.jeasyframeworks.system.model.Account;
 import com.jeasyframeworks.system.model.Group;
@@ -8,7 +8,7 @@ import com.jeasyframeworks.system.model.Role;
 import com.jeasyframeworks.toolkit.encrypt.MD5EncryptKit;
 import com.jfinal.core.Controller;
 
-@ControllerKey(controllerKey = "/system/init")
+@AnnoController(actionKey = "/system/init")
 public class InitialController extends Controller {
 
 	@ClearShiro

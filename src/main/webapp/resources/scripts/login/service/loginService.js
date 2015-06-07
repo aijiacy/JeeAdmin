@@ -1,9 +1,9 @@
 /**
  * 
  */
-define([ 'login-App' ], function(loginApp) {
+define([ 'main-App' ], function(mainApp) {
 	'use strict';
-	loginApp.service("loginSvr", [
+	mainApp.service("loginSvr", [
 			'$http',
 			function($http) {
 				var lgnSvr = {
@@ -17,7 +17,7 @@ define([ 'login-App' ], function(loginApp) {
 					},
 					login : function(data, fn) {
 						var param = data;
-						$http.post('system/login', param)
+						$http.post('system/login/signIn', param)
 						.success(
 								function(data, status) {
 									fn(data, status);
