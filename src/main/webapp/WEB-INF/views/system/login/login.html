@@ -1,13 +1,32 @@
-<form class="form-signin" method="post" ng-controller="loginCtrl" >
-	<h2 class="form-signin-heading">JeeAdmin sign in</h2>
-	<input type="text" id="username" name="username" ng-model="loginData.account.username" class="form-control" placeholder="plase input user name" required="" autofocus="" />
-	<input type="password" id="password" name="password" ng-model="loginData.account.password" class="form-control" placeholder="plase input password" required="">
-	<input type="text" id="captcha" name="captcha" ng-model="loginData.captcha" class="form-control" placeholder="plase input captcha" required="">
-	<img alt="" src="system/login/captcha" onclick="javascript:this.src='system/login/captcha?' + getDate();">
+<form class="form-horizontal form-signin" method="post" ng-controller="loginCtrl" >
+	<h2 class="form-signin-heading">Sign In</h2>
+	<div class="form-group">
+		<label for="username" class="col-sm-2 control-label">账号：</label>
+		<div class="col-sm-10">
+			<input type="text" id="username" name="username" ng-model="loginData.account.username" class="form-control" placeholder="plase input user name" required="" autofocus="" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="password" class="col-sm-2 control-label">密码：</label>
+		<div class="col-sm-10">
+			<input type="password" id="password" name="password" ng-model="loginData.account.password" class="form-control" placeholder="plase input password" required="" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="password" class="col-sm-2 control-label">验证：</label>
+		<div class="col-sm-10">
+			<div class="input-group">
+				<input type="text" id="captcha" name="captcha" ng-model="loginData.captcha" class="form-control" placeholder="plase input captcha" required="" aria-describedby="codeImg" />
+				<span class="input-group-addon" id="codeImg">
+					<img alt="" src="system/login/captcha?width=120&height=28&fontsize=28" onclick="javascript:this.src='system/login/captcha?' + getDate();" />
+				</span>
+			</div>
+		</div>
+	</div>
 	<div class="checkbox">
 		<label> <input ng-model="loginData.rememberMe" type="checkbox" value="remember-me">
-			Remember me
+			记住账号
 		</label>
 	</div>
-	<button class="btn btn-lg btn-primary btn-block" ng-click="doLogin();" >Sign in</button>
+	<button class="btn btn-lg btn-primary btn-block" ng-click="doLogin();" >登&nbsp;&nbsp;录</button>
 </form>

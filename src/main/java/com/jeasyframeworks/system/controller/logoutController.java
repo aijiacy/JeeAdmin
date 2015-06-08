@@ -17,5 +17,6 @@ public class logoutController extends Controller {
 		if (null != currUser) {
 			currUser.logout();
 		}
+		redirect("/");
 	}
 }

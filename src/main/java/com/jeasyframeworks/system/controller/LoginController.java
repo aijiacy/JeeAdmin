@@ -121,9 +121,9 @@ public class LoginController extends Controller {
 			captcha.setFontSize(fontsize, fontsize);
 		}
 		// 干扰线数量 默认0
-		captcha.setLineNum(1);
+		captcha.setLineNum(0);
 		// 噪点数量 默认50
-		captcha.setArtifactNum(30);
+		captcha.setArtifactNum(10);
 		// 使用字符 去掉0和o 避免难以确认
 		// captcha.setCode("123456789");
 		// 验证码在session里的名字 默认 captcha,创建时间为：名字_time
