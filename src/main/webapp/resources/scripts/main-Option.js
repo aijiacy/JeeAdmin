@@ -7,9 +7,9 @@ require.config({
 		'require'				: 'resources/plugins/require/2.1.17/require.min',
 		'jquery'				: 'resources/plugins/jquery/2.1.3/jquery.min',
 		'domReady'				: 'resources/plugins/require/2.1.17/domReady',
-		'angular'				: 'resources/plugins/angular/1.3.15/angular.min',
-		'angular-animate'		: 'resources/plugins/angular/1.3.15/angular-animate.min',
-		'angular-route'			: 'resources/plugins/angular/1.3.15/angular-route.min',
+		'angular'				: 'resources/plugins/angular/1.3.16/angular.min',
+		'angular-animate'		: 'resources/plugins/angular/1.3.16/angular-animate.min',
+		'angular-route'			: 'resources/plugins/angular/1.3.16/angular-route.min',
 		
 		'main-Start'			: 'resources/scripts/main-Start',
 		'main-App'				: 'resources/scripts/main-App',
