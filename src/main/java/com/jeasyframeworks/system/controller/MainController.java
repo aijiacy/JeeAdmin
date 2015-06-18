@@ -14,7 +14,12 @@ public class MainController extends Controller {
 	}
 
 	public void header() {
-		render("header.html");
+		Subject subject = SecurityUtils.getSubject();
+		if(subject.isAuthenticated()){
+			render("main-header.html");
+		} else {
+			render("login-header.html");
+		}
 	}
 
 	public void footer() {
@@ -30,7 +35,7 @@ public class MainController extends Controller {
 		if(subject.isAuthenticated()){
 			render("main.html");
 		} else {
-			redirect("/system/login");
+			redirect("/system");
 		}
 	}
 }

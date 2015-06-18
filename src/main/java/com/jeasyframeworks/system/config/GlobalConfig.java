@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
-import com.jeasyframeworks.core.session.SessionHandler;
+import com.jeasyframeworks.core.handler.URLSessionIdHandler;
 import com.jeasyframeworks.extentions.log.Slf4jLogFactory;
 import com.jeasyframeworks.extentions.route.plugin.RoutesBind;
 import com.jeasyframeworks.extentions.shiro.interceptor.ShiroInterceptor;
@@ -101,7 +101,7 @@ public class GlobalConfig extends JFinalConfig {
 
 	@Override
 	public void configHandler(Handlers me) {
-		me.add(new SessionHandler());
+		me.add(new URLSessionIdHandler());
 		DruidStatViewHandler dsv = new DruidStatViewHandler("/system/moniter",
 				new IDruidStatViewAuth() {
 					@Override

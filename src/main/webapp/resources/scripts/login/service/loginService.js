@@ -17,7 +17,7 @@ define([ 'main-App' ], function(mainApp) {
 					},
 					login : function(data, fn) {
 						var param = data;
-						$http.post('system/login/signIn', param)
+						$http.post('system/signIn', param)
 						.success(
 								function(data, status) {
 									fn(data, status);
